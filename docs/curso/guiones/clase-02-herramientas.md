@@ -36,9 +36,10 @@ Y ElevenLabs para la generación de audio.
 ELEVENLABS_API_KEY. Tapa las keys en pantalla: quien las vea puede gastar tus créditos]**
 
 Y por último, el Estudio de assets, que viene en el repositorio: un visor y editor donde
-vemos, escuchamos, creamos y regeneramos todas las imágenes y los audios del juego.
+vemos, escuchamos, creamos y regeneramos todas las imágenes y los audios del juego. Para
+abrirlo, basta con escribir /estudio en Claude Code.
 
-**[Mostrar: python tools/studio/server.py, que abre http://localhost:8765. Pasar por las
+**[Mostrar: escribir /estudio en Claude Code, que abre http://localhost:8765. Pasar por las
 pestañas Imágenes y Audio y abrir el botón Crear nuevo]**
 
 **[En cámara]**

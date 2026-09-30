@@ -68,8 +68,8 @@ Quiero comprobar todo sin gastar en imágenes ni audio:
 5. Que mi cuenta de ElevenLabs funciona, con una consulta que no genere audio. Si responde
    401 payment_issue, es una factura pendiente, no el código.
 6. Que los dos generadores arman sus prompts: corre los dos con --dry-run.
-7. Que el estudio de assets arranca: python tools/studio/server.py, en
-   http://localhost:8765, con las pestañas Imágenes y Audio.
+7. Que el estudio de assets arranca con el comando /estudio, en http://localhost:8765,
+   con las pestañas Imágenes y Audio.
 
 Además, proponme una lista de permisos para Claude Code con los comandos que vamos a usar
 en el curso, para que no me pidas autorización a cada paso. No la apliques hasta que te
@@ -133,9 +133,88 @@ Esta clase es solo para leer: no cambies nada.
 
 ---
 
-## 4. El prompt inicial
+## 4. El arte
 
-**Cuándo usarlo:** En la clase 4, para pasar de la idea a un boceto jugable en cajas grises. Los alumnos cambian el nombre, los personajes, los niveles y las referencias por los de su juego.
+**Cuándo usarlo:** En la clase 4, la primera de creación, para generar con GPT Image todo el arte del juego antes de programarlo. Los alumnos cambian el juego, los personajes y los escenarios por los suyos.
+
+
+```text
+Estoy en el repositorio de Claude Code Game Studios y quiero crear mi propio videojuego.
+Antes de programarlo, quiero crear todo su arte con GPT Image, en pixel art. En el repo ya
+están el pipeline de arte en tools/art/ (generate_art.py y asset_manifest.json) y el
+estudio de assets (python tools/studio/server.py). Mi key de OpenAI está en .env.local.
+
+El juego se va a llamar Vallebruma: El Bosque Umbrío. Es un juego de acción 2D de magia,
+de vista lateral, inspirado en el mundo de Harry Potter pero con nombres propios: el héroe
+es Nico Ravel, un joven estudiante de magia, y el villano es Morvane. Nico está perdido en
+un bosque prohibido y tiene que abrirse paso a punta de hechizos hasta enfrentarse a
+Morvane. Tiene tres niveles: un bosque de noche, una cueva y un cementerio con tormenta.
+
+Quiero que todo se vea del mismo juego: pixel art 2D nítido, con píxeles cuadrados, sin
+suavizado ni degradados, contorno oscuro en los personajes, una paleta limitada y diseños
+originales, sin texto ni logos. Ese estilo va en el campo style del manifiesto, así se
+aplica a todo.
+
+Empieza solo por Nico: de cuerpo entero, de perfil mirando a la derecha, con túnica con
+capucha y varita, y fondo transparente. Que no tenga nada de Harry Potter: ni anteojos
+redondos, ni cicatriz, ni escudo de casa, ni corbata a rayas. Muéstramelo y espera a que te
+diga que sí antes de gastar en lo demás. Después usa a Nico como referencia de estilo para
+el resto.
+
+Lo que necesita el juego:
+- Los personajes, todos de perfil mirando a la derecha, con fondo transparente y sin
+  sombra ni brillo alrededor: Nico; la araña y el hombre lobo, que se distingan bien
+  sobre un fondo oscuro; Morvane, un hechicero alto con capa rasgada y un bastón con un
+  cristal que brilla, sin parecerse a ningún villano famoso; y su forma final, un espectro
+  gigante de humo violeta, con garras, ojos brillantes y sin piernas.
+- El Bosque Umbrío de noche: un fondo lejano con luna y árboles a lo lejos, y tramos de
+  nivel con piso de pasto, raíces y piedras.
+- La Cueva de los Aullidos, que tiene que ser una cueva de verdad y no el bosque
+  oscurecido: cerrada, con estalactitas en todo el techo, piedra fría gris violeta y piso
+  de piedra y grava con charcos, sin pasto, sin cielo y sin luna. La única luz sale de
+  cristales y hongos que brillan. Solo el primer tramo muestra la entrada y solo el
+  último la salida.
+- El Cementerio de la Tormenta: lápidas torcidas, rejas, árboles secos y niebla, con un
+  último tramo que es la arena de Morvane.
+- Los efectos: el rayo de Fulgor, el destello de la varita, la chispa del impacto, el
+  humo al morir, la explosión, el aviso antes de que aparezca un enemigo, el
+  teletransporte, la luz de Lumos, la subida de nivel, y los orbes, el rayo y la onda de
+  choque de Morvane. Solo el efecto, sin ningún personaje, y lo que hace daño en colores
+  que se vean.
+- La interfaz: la mira para apuntar, un panel, el marco de las barras y los íconos de los
+  hechizos y las cartas, que se entiendan a 32 píxeles y sin letras. La fuente es
+  Pixelify Sans, esa no se genera.
+- La pantalla de título: Nico pequeño, de espaldas, con la varita en alto, frente a
+  Morvane enorme, en un paisaje en ruinas con tormenta.
+
+Nada de plataformas flotantes: en todos los tramos de nivel el piso tiene que ser plano,
+continuo y estar pintado dentro del escenario, a la misma altura de punta a punta, y los
+bordes tienen que empalmar con el tramo siguiente.
+
+Ten en cuenta que la API no acepta cualquier tamaño: 1024x512 falla. Usa 1024x1024 para
+personajes, íconos y efectos cuadrados, 1536x1024 para fondos, 1536x512 para los tramos de
+nivel, 1536x768 para imágenes anchas como el título y 1024x1536 para algo alto. Cada asset
+tiene su alto real en píxeles (Nico 48, la araña 24, el lobo 56, Morvane 64, el espectro
+72, los tramos 240), y en el juego se va a agrandar por 3 sin suavizado, así todo comparte
+la misma densidad de píxeles. La referencia de la cueva no puede ser un tramo del bosque,
+y las referencias de escenarios y efectos no pueden traer personajes. Todo el arte sale de
+GPT Image: nada dibujado por ti y nada de emojis. Las animaciones las hacemos en otra
+clase. No hagas commits, y avísame cuánto va costando cada tanda.
+
+Registra cada asset en el manifiesto para que yo pueda revisarlo y regenerarlo desde el
+estudio, también los que agregue con el botón Crear nuevo.
+
+Cuando termines, abre el estudio y dime qué ves mal antes de que te lo diga yo. Mide que
+los personajes y los efectos sean transparentes de verdad, no lo supongas a ojo.
+
+Antes de empezar, cuéntame tu plan y hazme las preguntas que tengas.
+```
+
+---
+
+## 5. El prompt del juego
+
+**Cuándo usarlo:** En la clase 5, con el arte ya generado, para programar el juego completo y jugable. Los alumnos cambian el nombre, los personajes, los niveles y las referencias por los de su juego.
 
 
 ```text
@@ -172,8 +251,11 @@ Para hacerme más fuerte: al subir de nivel el juego se pausa y elijo 1 de 3 car
 mejora, con 10 segundos para decidir. Puedo tener como máximo 4; si ya tengo 4, la nueva
 reemplaza la más vieja. Solo me ofrece cartas que sirvan donde estoy.
 
-Por ahora quiero solo el boceto jugable, con cajas grises. El arte lo hacemos después
-con GPT Image. Reglas que no quiero que rompas:
+El arte ya lo creé en la clase anterior con GPT Image: está en assets/art/ y registrado en
+tools/art/asset_manifest.json, y lo puedes ver en el estudio. Úsalo para los personajes,
+los niveles, los efectos y la interfaz, escalado por 3 sin suavizado, y conecta cada asset
+con el juego. Si falta algo, pon una caja gris y dime qué falta. Reglas que no quiero que
+rompas:
 - Todos los números y textos del juego van en un archivo de configuración, nada escrito
   directo en el código.
 - La lógica importante lleva tests.
@@ -189,85 +271,9 @@ Antes de escribir código, cuéntame tu plan y hazme las preguntas que tengas.
 
 ---
 
-## 5. El arte
-
-**Cuándo usarlo:** En la clase 5, cuando el boceto gris ya se juega bien, para generar e integrar todo el arte.
-
-
-```text
-Sigo con mi juego Vallebruma. El boceto en cajas grises ya se juega bien y ahora quiero
-ponerle todo el arte con GPT Image, en pixel art. En el repo ya están el pipeline de arte
-en tools/art/ (generate_art.py y asset_manifest.json) y el estudio de assets
-(python tools/studio/server.py). Mi key de OpenAI está en .env.local.
-
-Quiero que todo se vea del mismo juego: pixel art 2D nítido, con píxeles cuadrados, sin
-suavizado ni degradados, contorno oscuro en los personajes, una paleta limitada y diseños
-originales, sin texto ni logos. Ese estilo va en el campo style del manifiesto, así se
-aplica a todo.
-
-Empieza solo por Nico: de cuerpo entero, de perfil mirando a la derecha, con túnica con
-capucha y varita, y fondo transparente. Que no tenga nada de Harry Potter: ni anteojos
-redondos, ni cicatriz, ni escudo de casa, ni corbata a rayas. Muéstramelo y espera a que te
-diga que sí antes de gastar en lo demás. Después usa a Nico como referencia de estilo para
-el resto.
-
-Lo que necesita el juego:
-- Los personajes, todos de perfil mirando a la derecha, con fondo transparente y sin
-  sombra ni brillo alrededor: Nico; la araña y el hombre lobo, que se distingan bien
-  sobre un fondo oscuro; Morvane, un hechicero alto con capa rasgada y un bastón con un
-  cristal que brilla, sin parecerse a ningún villano famoso; y su forma final, un espectro
-  gigante de humo violeta, con garras, ojos brillantes y sin piernas.
-- El Bosque Umbrío de noche: un fondo lejano con luna y árboles a lo lejos, y tramos de
-  nivel con piso de pasto, raíces y piedras.
-- La Cueva de los Aullidos, que tiene que ser una cueva de verdad y no el bosque
-  oscurecido: cerrada, con estalactitas en todo el techo, piedra fría gris violeta y piso
-  de piedra y grava con charcos, sin pasto, sin cielo y sin luna. La única luz sale de
-  cristales y hongos que brillan, y esos cristales tienen que dar luz de verdad en el
-  juego. Solo el primer tramo muestra la entrada y solo el último la salida.
-- El Cementerio de la Tormenta: lápidas torcidas, rejas, árboles secos y niebla, con un
-  último tramo que es la arena de Morvane.
-- Los efectos: el rayo de Fulgor, el destello de la varita, la chispa del impacto, el
-  humo al morir, la explosión, el aviso antes de que aparezca un enemigo, el
-  teletransporte, la luz de Lumos, la subida de nivel, y los orbes, el rayo y la onda de
-  choque de Morvane. Solo el efecto, sin ningún personaje, y lo que hace daño en colores
-  que se vean.
-- La interfaz: la mira para apuntar, un panel, el marco de las barras y los íconos de los
-  hechizos y las cartas, que se entiendan a 32 píxeles y sin letras. La fuente es
-  Pixelify Sans, esa no se genera.
-- La pantalla de título: Nico pequeño, de espaldas, con la varita en alto, frente a
-  Morvane enorme, en un paisaje en ruinas con tormenta.
-
-En todos los tramos de nivel el piso tiene que ser plano, continuo y estar pintado dentro
-del escenario, a la misma altura de punta a punta, y los bordes tienen que empalmar con
-el tramo siguiente. Nada de plataformas sueltas que parezcan un PNG pegado.
-
-Ten en cuenta que la API no acepta cualquier tamaño: 1024x512 falla. Usa 1024x1024 para
-personajes, íconos y efectos cuadrados, 1536x1024 para hojas de animación y fondos,
-1536x512 para los tramos de nivel, 1536x768 para imágenes anchas como el título y
-1024x1536 para algo alto. Cada asset tiene su alto real en píxeles (Nico 48, la araña 24,
-el lobo 56, Morvane 64, el espectro 72, los tramos 240) y Godot lo agranda por 3 sin
-suavizado, así todo comparte la misma densidad de píxeles. La referencia de la cueva no
-puede ser un tramo del bosque, y las referencias de escenarios y efectos no pueden traer
-personajes. Los números nuevos van en game_config.json. Todo el arte sale de GPT Image:
-nada dibujado por ti y nada de emojis. No hagas commits, y avísame cuánto va costando cada
-tanda.
-
-Registra cada asset en el manifiesto para que yo pueda revisarlo y regenerarlo desde el
-estudio, también los que agregue con el botón Crear nuevo.
-
-Cuando termines, quiero ver capturas de los tres niveles, del jefe, de las cartas y del
-título, y que me digas qué ves mal antes de que te lo diga yo. Mide que los personajes y
-los efectos sean transparentes de verdad, no lo supongas a ojo. Después lo reviso todo en
-el estudio.
-
-Antes de empezar, cuéntame tu plan y hazme las preguntas que tengas.
-```
-
----
-
 ## 6. La animación
 
-**Cuándo usarlo:** En la clase 6, con todo el arte fijo ya integrado, para animar personajes, efectos y el jefe.
+**Cuándo usarlo:** En la clase 6, con el juego ya armado con el arte fijo, para animar personajes, efectos y el jefe.
 
 
 ```text
