@@ -179,16 +179,22 @@ Verificado:
   `production/qa/evidence/web_title.png` y `web_gameplay.png`.
 
 Falta:
-- **Escucharlo.** La primera versión publicada no sonaba. La causa probable: en la web,
-  Godot 4.3 y posteriores reproducen el audio en modo `Sample` por defecto
-  (`audio/general/default_playback_type.web=1`), y ese modo falla con los buses creados
-  por código al arrancar, como `Music` y `SFX` en `AudioDirector`. Se cambió a `Stream` en
-  `project.godot` (`[audio] general/default_playback_type.web=0`), se volvió a exportar y
-  se volvió a publicar. **Falta confirmarlo de oído en Chrome.** Las pruebas automáticas
-  no sirven para el audio: en el Chrome que controla Playwright, `audioWorklet.addModule`
-  nunca termina, ni siquiera con un módulo mínimo, así que el contexto de Godot se queda
-  en `suspended`. Si con `Stream` sigue sin sonar, lo siguiente es crear los buses `Music`
-  y `SFX` en un `default_bus_layout.tres` en vez de por código.
+- **Audio web: resuelto.** Había dos problemas:
+  1. En la web, Godot usa por defecto el modo de audio `Sample`. Se cambió a `Stream` en
+     `project.godot`: `[audio] general/default_playback_type.web=0`.
+  2. **La causa de fondo, en esta máquina:** al arrancar, Godot carga un procesador de
+     audio (`audioWorklet.addModule`), y en este Chrome y en este Edge esa carga nunca
+     termina, ni siquiera con un módulo mínimo. Mientras está pendiente, el navegador no
+     deja reanudar el `AudioContext`: queda en `suspended` aunque hagas clic, y el juego
+     queda mudo. Se comprobó quitando la carga: el contexto pasa a `running` y la salida
+     medida sube de 0 a 0,16.
+  - **Arreglo:** `python tools/web/patch_web_audio.py build/web` después de cada
+    exportación. Hace que Godot use ScriptProcessor en vez de AudioWorklet y no carga el
+    procesador de posición, que solo usa el modo `Sample`.
+  - **Medido en https://vallebruma.vercel.app:** contexto `running` y nivel de salida
+    0,16 al empezar la partida.
+  - **Costo:** ScriptProcessor corre en el hilo principal y está marcado como obsoleto.
+    Si el juego se traba mucho, puede crepitar.
 - **Publicado en Vercel** el 30 de septiembre de 2026: https://vallebruma.vercel.app
   (cuenta personal `jorgediaz-1021`, proyecto `vallebruma`). Se publicó con
   `cd build/web && vercel deploy --prod --yes --name vallebruma --scope jorgediaz-1021`.
