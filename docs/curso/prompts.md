@@ -409,7 +409,9 @@ Ten en cuenta que la web solo funciona con el renderer Compatibility (el juego y
 Exporta sin hilos, así Vercel no necesita cabeceras especiales. Godot no exporta los
 archivos .json solo, así que incluye la configuración del juego en el preset. En la web,
 Godot reproduce el audio en modo Sample por defecto y el juego queda mudo: cambia
-audio/general/default_playback_type.web a Stream. El navegador no deja sonar nada hasta el
+audio/general/default_playback_type.web a Stream. Después de exportar, corre
+python tools/web/patch_web_audio.py build/web: en algunos navegadores el procesador de
+audio de Godot nunca termina de cargar y el juego queda mudo aunque hagas clic. El navegador no deja sonar nada hasta el
 primer clic, así que la pantalla de título tiene que esperar esa interacción. Quiero saber
 cuánto pesa el juego y cuánto tarda en cargar, y el progreso tiene que sobrevivir a
 recargar la página. Los menús solo muestran y
