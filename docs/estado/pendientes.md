@@ -179,7 +179,16 @@ Verificado:
   `production/qa/evidence/web_title.png` y `web_gameplay.png`.
 
 Falta:
-- **Escucharlo.** Una prueba automática no oye el audio; se prueba abriendo la página.
+- **Escucharlo.** La primera versión publicada no sonaba. La causa probable: en la web,
+  Godot 4.3 y posteriores reproducen el audio en modo `Sample` por defecto
+  (`audio/general/default_playback_type.web=1`), y ese modo falla con los buses creados
+  por código al arrancar, como `Music` y `SFX` en `AudioDirector`. Se cambió a `Stream` en
+  `project.godot` (`[audio] general/default_playback_type.web=0`), se volvió a exportar y
+  se volvió a publicar. **Falta confirmarlo de oído en Chrome.** Las pruebas automáticas
+  no sirven para el audio: en el Chrome que controla Playwright, `audioWorklet.addModule`
+  nunca termina, ni siquiera con un módulo mínimo, así que el contexto de Godot se queda
+  en `suspended`. Si con `Stream` sigue sin sonar, lo siguiente es crear los buses `Music`
+  y `SFX` en un `default_bus_layout.tres` en vez de por código.
 - **Publicado en Vercel** el 30 de septiembre de 2026: https://vallebruma.vercel.app
   (cuenta personal `jorgediaz-1021`, proyecto `vallebruma`). Se publicó con
   `cd build/web && vercel deploy --prod --yes --name vallebruma --scope jorgediaz-1021`.
