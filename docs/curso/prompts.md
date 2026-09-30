@@ -376,7 +376,7 @@ Antes de empezar, cuéntame tu plan y hazme las preguntas que tengas.
 
 ## 8. Mejoras y publicación en la web
 
-**Cuándo usarlo:** En la clase 8, con el juego completo, para cerrar el balance, los menús y preparar la exportación web.
+**Cuándo usarlo:** En la clase 8, con el juego completo, para cerrar el balance, los menús y publicarlo en la web con Vercel.
 
 
 ```text
@@ -401,20 +401,25 @@ Después, los menús:
   completa, guardadas aparte de la partida.
 - Todo navegable con teclado, mouse y mando.
 
-Y por último, la web. Antes de exportar, investiga y dime qué hace falta en Godot 4.7.2:
-las plantillas de exportación y el preset Web, si necesita cabeceras especiales para los
-hilos y si itch.io o GitHub Pages las permiten. Espera a que yo elija dónde publicarlo.
+Y por último, quiero publicarlo en la web con Vercel. Instala las plantillas de exportación
+de Godot 4.7.2 si faltan, crea el preset Web y expórtalo a build/web. Después prepáralo
+para Vercel y, antes de publicar, pregúntame.
 
-Ten en cuenta que la web solo funciona con el renderer Compatibility (el juego ya lo usa),
-que el navegador no deja sonar nada hasta el primer clic (la pantalla de título tiene que
-esperar esa interacción), que quiero saber cuánto pesa el juego y cuánto tarda en cargar,
-y que el progreso tiene que sobrevivir a recargar la página. Los menús solo muestran y
+Ten en cuenta que la web solo funciona con el renderer Compatibility (el juego ya lo usa).
+Exporta sin hilos, así Vercel no necesita cabeceras especiales. Godot no exporta los
+archivos .json solo, así que incluye la configuración del juego en el preset. En la web,
+Godot reproduce el audio en modo Sample por defecto y el juego queda mudo: cambia
+audio/general/default_playback_type.web a Stream. El navegador no deja sonar nada hasta el
+primer clic, así que la pantalla de título tiene que esperar esa interacción. Quiero saber
+cuánto pesa el juego y cuánto tarda en cargar, y el progreso tiene que sobrevivir a
+recargar la página. Los menús solo muestran y
 avisan con señales; qué hace cada botón lo decide main.gd. La lógica de las opciones lleva
 tests, las capturas de prueba nunca tocan mi partida real y no quiero commits.
 
 Cuando termines, quiero correr los tests y ver capturas del título, la pausa y las
 opciones. Para la web, dame el peso, el tiempo de carga y una captura del juego en el
-navegador. Lo que no hayas podido probar, dímelo como pendiente, no como hecho.
+navegador. El sonido lo compruebo yo abriendo la página, porque una prueba automática no
+lo oye. Lo que no hayas podido probar, dímelo como pendiente, no como hecho.
 
 Antes de empezar, cuéntame tu plan y hazme las preguntas que tengas.
 ```
