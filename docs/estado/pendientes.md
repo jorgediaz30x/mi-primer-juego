@@ -180,8 +180,14 @@ Verificado:
 
 Falta:
 - **Escucharlo.** Una prueba automática no oye el audio; se prueba abriendo la página.
-- **Publicarlo en Vercel.** La CLI está instalada y con sesión iniciada.
-  `build/web/vercel.json` solo agrega caché para `.wasm` y `.pck`.
+- **Publicado en Vercel** el 30 de septiembre de 2026: https://vallebruma.vercel.app
+  (cuenta personal `jorgediaz-1021`, proyecto `vallebruma`). Se publicó con
+  `cd build/web && vercel deploy --prod --yes --name vallebruma --scope jorgediaz-1021`.
+  Carga y arranca el nivel 1 sin errores en la consola. Hay que pasar `--scope` porque la
+  cuenta también tiene un equipo, y la CLI no deja elegir sin preguntar. Las URLs con el
+  hash del deploy piden iniciar sesión en Vercel; la pública es la de arriba.
+  `build/web/vercel.json` solo agrega caché para `index.wasm` y `index.pck`. Ojo: Vercel
+  rechaza un `\.` dentro de `source`, porque no es JSON válido.
 - Confirmar que el guardado sobrevive al recargar la página, y que las luces de la cueva se
   ven igual.
 
