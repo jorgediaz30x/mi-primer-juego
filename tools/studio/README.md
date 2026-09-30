@@ -10,6 +10,8 @@ los dos scripts.
 
 ## Cómo abrirlo
 
+Desde Claude Code, escribe `/estudio`. O desde la terminal:
+
 ```bash
 python tools/studio/server.py
 ```
