@@ -9,25 +9,28 @@ El prompt de esta clase es el número 5 de [prompts.md](../prompts.md).
 
 Bienvenidos a la clase 5. Ya tenemos el arte, y ahora queremos que el videojuego funcione.
 
-Yo ya tengo un prompt preparado para mi videojuego. Mi juego se llama Vallebruma: El
-Bosque Umbrío. Es un juego de acción en 2D de magia: Nico, un joven estudiante de magia,
-está perdido en un bosque prohibido y tiene que abrirse paso a punta de hechizos, pasando
-por una cueva y un cementerio, hasta enfrentarse al villano, Morvane.
+Mi videojuego está inspirado en Harry Potter, y en juegos como Cuphead, Hotline Miami y
+Bloodborne. De Cuphead tomé la forma de avanzar por el nivel hasta llegar a un jefe. De
+Hotline Miami, que sea rápido y difícil: si te tocan, mueres. Y de Bloodborne, que cuando
+mueres no pierdes lo que ganaste y vuelves a intentarlo.
 
-**[Mostrar: el prompt 5 completo en pantalla, recorriéndolo por partes: cómo se juega, los
-niveles, los controles, las mejoras y las reglas]**
+Yo ya creé el prompt. Aquí pueden ver un poco.
 
-Aquí está el prompt completo. Si lo quieren leer, se lo dejo en la descripción del video.
+**[Mostrar: el prompt 5 en pantalla]**
 
-**[Mostrar: pegar el prompt en Claude Code, leer el plan que propone y responder sus
-preguntas]**
+Les explico un poco cómo es el videojuego: se juega de lado, avanzando hacia la derecha.
+Tiene tres niveles, un bosque, una cueva y un cementerio, y al final está el jefe. Te
+mueves, saltas y lanzas hechizos apuntando con el mouse. Y cada vez que subes de nivel,
+eliges una carta que te hace más fuerte.
+
+El prompt completo se los dejo en la descripción, por si lo quieren leer.
+
+**[Mostrar: el juego corriendo]**
+
+**[En cámara]**
 
 Los invito a que sean lo más detallados posible. Y si hay cosas por corregir, no tengan
 miedo de pedírselas a Claude, hasta que el videojuego les guste.
-
-**[Mostrar: el juego corriendo por primera vez, y un pedido de corrección a Claude]**
-
-**[En cámara]**
 
 Recuerden: el videojuego primero les tiene que gustar a ustedes. Diviértanse ustedes antes
 que nadie. Después lo prueban con otras personas, a ver si funciona, y lo van refinando.
