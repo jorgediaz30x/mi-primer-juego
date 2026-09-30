@@ -155,25 +155,35 @@ nombrar artistas ni juegos, porque ElevenLabs rechaza los prompts con nombres pr
 
 **Objetivo:** que los alumnos jueguen desde el navegador, con audio, sin instalar nada.
 
-Todavía no se investigó en detalle. Antes de empezar hay que verificar:
+**Estado al 30 de septiembre de 2026: exporta y corre en el navegador.** Falta publicarlo
+en Vercel y escucharlo.
 
-- **Renderer.** En Godot 4, la exportación web solo funciona con el renderer
-  *Compatibility*. El juego **ya lo usa** (`project.godot`: `rendering_method="gl_compatibility"`),
-  así que en ese punto no hace falta migrar nada. Queda probar que las luces de la cueva
-  se vean igual en el navegador.
-- **Audio en el navegador.** Los navegadores no dejan sonar nada hasta el primer clic o
-  tecla del jugador. **Ya existe la pantalla de inicio** (título con menú: Continuar /
-  Partida nueva / Opciones / Controles / Salir). En web, la música del título espera a
-  esa primera interacción (`TitleScreen.interacted`) antes de sonar, así que ya cumple
-  el rol de "clic para empezar" — falta probarlo en un build web real.
-- **Plantillas de exportación.** Hay que descargar las de Godot 4.7.2 y crear el preset "Web".
-- **Hosting.** Elegir dónde publicarlo (itch.io, GitHub Pages u otro) y revisar si esa
-  versión de Godot necesita cabeceras especiales para funcionar con hilos.
-- **Peso.** Medir cuánto pesan el `.pck` con todo el arte y la música, y cuánto tarda en cargar.
-- **Guardado.** En la web, `user://` se guarda en el navegador. Confirmar que el progreso
-  al estilo Bloodborne sobrevive al recargar la página.
+Verificado:
+- **Plantillas de exportación de 4.7.2:** instaladas en
+  `%APPDATA%/Godot/export_templates/4.7.2.stable/`.
+- **Preset "Web"** en `export_presets.cfg`: sin hilos (`variant/thread_support=false`), con
+  compresión de texturas solo para escritorio. Incluye `assets/data/*.json`, que Godot no
+  exporta solo porque no es un recurso, y excluye `_raw`, `_history`, `tests`, `tools`,
+  `docs` y `production`. Ojo: el `.gitignore` del framework ignora este archivo, así que
+  se agregó a la fuerza.
+- **Sin hilos, a propósito:** así no hacen falta las cabeceras COOP/COEP en el servidor. Es
+  lo más simple para un alumno.
+- **Exportación sin ventana:**
+  `godot --headless --path . --export-release "Web" build/web/index.html`. Terminó sin
+  errores ni avisos, y Godot no pidió habilitar nada.
+- **Peso:** unos 53 MB en total. `index.wasm` pesa 39,5 MB y `index.pck` 13,5 MB, con todo
+  el arte y la música.
+- **Prueba local en Edge sin ventana:** la pantalla de inicio se ve bien (Continuar y Salir
+  no aparecen: no hay partida guardada y en web no se puede salir). Partida nueva arranca
+  el nivel 1 con el arte y la interfaz correctos. La consola no muestra errores. Capturas:
+  `production/qa/evidence/web_title.png` y `web_gameplay.png`.
 
-Conviene hacerlo **después** del audio, para probar la versión web con todo el sonido.
+Falta:
+- **Escucharlo.** Una prueba automática no oye el audio; se prueba abriendo la página.
+- **Publicarlo en Vercel.** La CLI está instalada y con sesión iniciada.
+  `build/web/vercel.json` solo agrega caché para `.wasm` y `.pck`.
+- Confirmar que el guardado sobrevive al recargar la página, y que las luces de la cueva se
+  ven igual.
 
 ---
 
