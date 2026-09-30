@@ -1,0 +1,7 @@
+{
+  "_comment": "Audio del juego pedido a ElevenLabs. kind 'music' usa POST /v1/music (length_s hasta 600); kind 'sfx' usa POST /v1/sound-generation (duration_s 0.5-30). 'link' = dónde se escribe la ruta en game_config.json. Los prompts describen el ESTILO: ElevenLabs rechaza nombres de artistas.",
+  "music_model": "music_v2_5",
+  "sfx_model": "eleven_text_to_sound_v2",
+  "output_format": "mp3_44100_128",
+  "assets": []
+}
