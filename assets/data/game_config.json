@@ -1,0 +1,1981 @@
+{
+  "names": {
+    "game_title": "Vallebruma: El Bosque Umbrío",
+    "hero": "Nico Ravel",
+    "villain": "Morvane",
+    "level_title": "Nivel 1 — El Bosque Umbrío",
+    "level_intro": "Perdido en el bosque prohibido... algo se mueve entre los árboles. Avanza hacia la derecha.",
+    "villain_line": "Morvane se desvanece entre las sombras: «Esto no termina aquí, aprendiz...»",
+    "spell_bolt": "Fulgor",
+    "spell_levitate": "Aerum",
+    "wave_cleared": "¡Oleada superada!",
+    "death_title": "TE ATRAPARON",
+    "death_hint": "[R] Volver al último punto de control     [N] Empezar de cero",
+    "victory_title": "¡GANASTE!",
+    "victory_hint": "[R] Jugar de nuevo (conservas tus mejoras)     [N] Empezar de cero",
+    "ui_run_stats": "Puntos: %d   ·   XP ganada: +%d   ·   Mejor combo: x%d",
+    "controls_hint": "A/D moverse · W saltar · Clic Fulgor · Clic der. Aerum · E Nova · F Lumos · Shift dash · R reiniciar",
+    "ui_score": "Puntos: %d",
+    "ui_grade": "Nota: %s",
+    "ui_encounter": "Zona %d/%d — %s",
+    "ui_boss_stage": "La guarida de Morvane",
+    "boss_intro": "Morvane: «¿Otro aprendiz perdido? Qué conveniente.»",
+    "ui_level": "Nv %d",
+    "ui_level_up": "¡NIVEL %d!",
+    "spell_dash": "Dash",
+    "ui_level_up_title": "¡NIVEL %d!",
+    "ui_level_up_subtitle": "Elige una mejora  —  [1] [2] [3] o clic",
+    "ui_card_stack": "Nv %d → %d",
+    "ui_card_new": "NUEVA",
+    "ui_owned": "Mejoras:",
+    "ui_best": "Récord: %d",
+    "ui_hearts": "Vida",
+    "checkpoint_saved": "Zona despejada — punto de control guardado",
+    "checkpoint_respawn": "Volviste al último punto de control. Tus mejoras siguen contigo.",
+    "dark_hint": "Está muy oscuro... usa Lumos [F]",
+    "level_complete": "¡ZONA SUPERADA!",
+    "level_complete_hint": "Siguiente nivel en un momento...",
+    "boss_title": "MORVANE",
+    "boss_subtitle": "el Señor sin Sombra",
+    "boss_knockout": "¡DERROTADO!",
+    "boss_transform": "Morvane abandona su cuerpo...",
+    "ui_offer_full": "Ya tienes %d mejoras: la nueva reemplaza a la más vieja, o conserva las tuyas",
+    "ui_keep_upgrades": "Conservar mis mejoras   [%d]",
+    "ui_discovery_title": "¡Descubriste algo nuevo!",
+    "ui_card_replaces": "Reemplaza a: %s",
+    "ui_pick_timer": "%d s para elegir",
+    "ui_pick_expired": "Se acabó el tiempo: perdiste la mejora",
+    "title_main": "Vallebruma",
+    "title_subtitle": "El Bosque Umbrío",
+    "menu_continue": "Continuar",
+    "menu_new_game": "Partida nueva",
+    "menu_options": "Opciones",
+    "menu_controls": "Controles",
+    "menu_quit": "Salir",
+    "menu_new_game_confirm_title": "¿Empezar de cero?",
+    "menu_new_game_confirm_body": "Perderás tu nivel, tus mejoras y tu punto de control.",
+    "menu_new_game_confirm_yes": "Sí, empezar de cero",
+    "menu_new_game_confirm_cancel": "Cancelar",
+    "menu_back": "Volver",
+    "menu_resume": "Seguir",
+    "menu_pause_title": "Pausa",
+    "menu_to_title": "Volver al inicio",
+    "options_title": "Opciones",
+    "options_master": "Volumen general",
+    "options_music": "Música",
+    "options_sfx": "Efectos",
+    "options_fullscreen": "Pantalla completa",
+    "controls_title": "Controles"
+  },
+  "debug": {
+    "_comment": "Colores de gray-box, SOLO para depurar colisiones. El arte real sale de GPT Image (ver sprites).",
+    "world": "#5a5a5a",
+    "player": "#d9d9d9",
+    "enemy": "#b04040",
+    "enemy_heavy": "#803030",
+    "npc": "#707090",
+    "projectile": "#e0e0e0",
+    "held": "#9fd0e0",
+    "warning": "#ff4040",
+    "text": "#ffffff",
+    "text_dim": "#bbbbbb"
+  },
+  "sprites": {
+    "hero": "res://assets/art/hero/hero.png",
+    "spider": "res://assets/art/spider/spider.png",
+    "werewolf": "res://assets/art/werewolf/werewolf.png",
+    "villain": "res://assets/art/villain/villain.png",
+    "_comment": "Sprite fijo de respaldo (si falta la animación). Lo escribe tools/art/generate_art.py.",
+    "wraith": "res://assets/art/villain/wraith.png"
+  },
+  "player": {
+    "run_speed": 430.0,
+    "ground_accel": 3800.0,
+    "ground_friction": 4400.0,
+    "air_accel": 2900.0,
+    "jump_velocity": -1000.0,
+    "gravity": 2300.0,
+    "fall_gravity": 3200.0,
+    "max_fall_speed": 1500.0,
+    "jump_cut": 0.45,
+    "coyote_time": 0.1,
+    "jump_buffer": 0.12,
+    "dash_speed": 1300.0,
+    "dash_time": 0.14,
+    "dash_cooldown": 0.45,
+    "hitbox": [
+      42,
+      130
+    ],
+    "hurtbox": [
+      26,
+      104
+    ],
+    "dash_refund_on_kill": true,
+    "dash_kill_knockback": 450.0,
+    "spawn_x": 200,
+    "cast_anim_time": 0.18,
+    "run_anim_threshold": 30.0,
+    "facing_mode": "aim",
+    "_facing_mode": "\"aim\": mira hacia donde apunta el mouse; \"move\": mira hacia donde camina.",
+    "max_hearts": 2,
+    "hurt_invulnerability": 1.2,
+    "hurt_knockback": 520.0,
+    "hurt_hop": -380.0,
+    "cast_height": 0.55
+  },
+  "spells": {
+    "bolt": {
+      "speed": 1400.0,
+      "cooldown": 0.24,
+      "min_cooldown": 0.08,
+      "damage": 1,
+      "pierce": 0,
+      "shots": 1,
+      "spread_degrees": 9.0,
+      "lifetime": 0.9,
+      "radius": 14.0,
+      "knockback": 260.0,
+      "muzzle_offset": 34.0
+    },
+    "levitate": {
+      "cooldown": 1.1,
+      "min_cooldown": 0.25,
+      "grab_radius": 150.0,
+      "range": 520.0,
+      "hold_distance": 110.0,
+      "hold_stiffness": 18.0,
+      "max_hold_time": 2.5,
+      "throw_speed": 1300.0,
+      "thrown_damage": 2,
+      "explode_radius": 170.0,
+      "explosion_boss_damage": 3
+    },
+    "nova": {
+      "_comment": "Hechizo de área (tecla E). Se desbloquea con la carta 'Nova'.",
+      "count": 6,
+      "speed": 1100.0,
+      "cooldown": 2.5,
+      "damage": 1,
+      "lifetime": 0.7
+    },
+    "lumos": {
+      "_comment": "Luz (tecla F). En zonas oscuras es la única forma de ver.",
+      "radius": 360.0,
+      "duration": 8.0,
+      "cooldown": 3.0,
+      "idle_radius": 90.0,
+      "energy": 1.3,
+      "color": [
+        1.0,
+        0.95,
+        0.8,
+        1
+      ]
+    }
+  },
+  "enemies": {
+    "spider": {
+      "hp": 1,
+      "speed": 260.0,
+      "accel": 2600.0,
+      "gravity": 1800.0,
+      "hop_velocity": -700.0,
+      "hop_cooldown": 0.8,
+      "hang_min_y": 120.0,
+      "hang_max_y": 300.0,
+      "descend_speed": 340.0,
+      "drop_trigger_distance": 120.0,
+      "max_hang_time": 1.6,
+      "burrow_leap_velocity": -1150.0,
+      "burrow_side_speed": 200.0,
+      "size": [
+        66,
+        50
+      ],
+      "lunge_range": 160.0,
+      "lunge_speed": 620.0,
+      "lunge_velocity": -420.0,
+      "lunge_cooldown": 1.4,
+      "points": 100,
+      "xp": 12,
+      "show_health_bar": false
+    },
+    "werewolf": {
+      "hp": 14,
+      "speed": 140.0,
+      "accel": 900.0,
+      "gravity": 2000.0,
+      "charge_speed": 460.0,
+      "charge_range": 520.0,
+      "charge_vertical_tolerance": 90.0,
+      "telegraph_time": 0.55,
+      "charge_time": 0.75,
+      "recover_time": 0.6,
+      "size": [
+        80,
+        150
+      ],
+      "points": 400,
+      "xp": 60,
+      "show_health_bar": true
+    }
+  },
+  "feel": {
+    "hitstop_kill": 0.035,
+    "hitstop_scale": 0.05,
+    "shake_kill": 7.0,
+    "shake_explosion": 16.0,
+    "shake_death": 22.0,
+    "shake_decay": 55.0,
+    "death_slowmo_scale": 0.3,
+    "death_screen_delay": 0.55,
+    "spawn_warning_time": 0.65,
+    "shake_shot": 2.0,
+    "hitstop_hit": 0.012,
+    "crosshair_kick": 1.35
+  },
+  "combo": {
+    "window": 2.0,
+    "step_per_kill": 0.25,
+    "max_multiplier": 4.0
+  },
+  "level": {
+    "view_size": [
+      1280,
+      720
+    ],
+    "floor_y": 600,
+    "floor_art_offset": 0,
+    "camera": {
+      "lead": 160.0,
+      "smoothing": 6.0
+    },
+    "spawn_margin": 60.0,
+    "burrow_min_distance": 260.0,
+    "villain_duration": 3.5,
+    "_comment": "Valores por defecto para todos los niveles; cada entrada de 'levels' puede pisarlos.",
+    "darkness": {
+      "outside": 1.0,
+      "inside": 0.07,
+      "fade": 2.0
+    }
+  },
+  "scoring": {
+    "_comment": "Nota final por puntos (de mayor a menor). Ajustar tras playtest.",
+    "grades": [
+      {
+        "grade": "S",
+        "min_points": 60000
+      },
+      {
+        "grade": "A",
+        "min_points": 35000
+      },
+      {
+        "grade": "B",
+        "min_points": 18000
+      },
+      {
+        "grade": "C",
+        "min_points": 0
+      }
+    ]
+  },
+  "feel_tints": {
+    "_comment": "Modulate sobre el arte generado. Valores > 1 hacen brillar el sprite.",
+    "hit_flash": [
+      3,
+      3,
+      3,
+      1
+    ],
+    "telegraph": [
+      2.2,
+      0.6,
+      0.6,
+      1
+    ],
+    "invulnerable": [
+      1,
+      1,
+      1,
+      0.45
+    ],
+    "held": [
+      0.6,
+      1.6,
+      2.0,
+      1
+    ]
+  },
+  "animations": {
+    "hero": {
+      "idle": {
+        "frames": [
+          "res://assets/art/hero/hero_idle_00.png",
+          "res://assets/art/hero/hero_idle_01.png",
+          "res://assets/art/hero/hero_idle_02.png",
+          "res://assets/art/hero/hero_idle_03.png"
+        ],
+        "fps": 6,
+        "loop": true,
+        "anchor": [
+          10,
+          48
+        ]
+      },
+      "run": {
+        "frames": [
+          "res://assets/art/hero/hero_run_00.png",
+          "res://assets/art/hero/hero_run_01.png",
+          "res://assets/art/hero/hero_run_02.png",
+          "res://assets/art/hero/hero_run_03.png",
+          "res://assets/art/hero/hero_run_04.png",
+          "res://assets/art/hero/hero_run_05.png",
+          "res://assets/art/hero/hero_run_06.png",
+          "res://assets/art/hero/hero_run_07.png"
+        ],
+        "fps": 14,
+        "loop": true,
+        "anchor": [
+          17,
+          48
+        ]
+      },
+      "cast": {
+        "frames": [
+          "res://assets/art/hero/hero_cast_00.png",
+          "res://assets/art/hero/hero_cast_01.png",
+          "res://assets/art/hero/hero_cast_02.png"
+        ],
+        "fps": 18,
+        "loop": false,
+        "anchor": [
+          19,
+          48
+        ]
+      },
+      "jump": {
+        "frames": [
+          "res://assets/art/hero/hero_jump_00.png",
+          "res://assets/art/hero/hero_jump_01.png"
+        ],
+        "fps": 1,
+        "loop": false,
+        "anchor": [
+          18,
+          48
+        ]
+      }
+    },
+    "spider": {
+      "crawl": {
+        "frames": [
+          "res://assets/art/spider/spider_crawl_00.png",
+          "res://assets/art/spider/spider_crawl_01.png",
+          "res://assets/art/spider/spider_crawl_02.png",
+          "res://assets/art/spider/spider_crawl_03.png",
+          "res://assets/art/spider/spider_crawl_04.png",
+          "res://assets/art/spider/spider_crawl_05.png"
+        ],
+        "fps": 14,
+        "loop": true,
+        "anchor": [
+          15,
+          22
+        ]
+      }
+    },
+    "werewolf": {
+      "walk": {
+        "frames": [
+          "res://assets/art/werewolf/werewolf_walk_00.png",
+          "res://assets/art/werewolf/werewolf_walk_01.png",
+          "res://assets/art/werewolf/werewolf_walk_02.png",
+          "res://assets/art/werewolf/werewolf_walk_03.png",
+          "res://assets/art/werewolf/werewolf_walk_04.png",
+          "res://assets/art/werewolf/werewolf_walk_05.png"
+        ],
+        "fps": 10,
+        "loop": true,
+        "anchor": [
+          25,
+          56
+        ]
+      },
+      "charge": {
+        "frames": [
+          "res://assets/art/werewolf/werewolf_charge_00.png",
+          "res://assets/art/werewolf/werewolf_charge_01.png",
+          "res://assets/art/werewolf/werewolf_charge_02.png",
+          "res://assets/art/werewolf/werewolf_charge_03.png"
+        ],
+        "fps": 14,
+        "loop": true,
+        "anchor": [
+          36,
+          56
+        ]
+      },
+      "roar": {
+        "frames": [
+          "res://assets/art/werewolf/werewolf_roar_00.png",
+          "res://assets/art/werewolf/werewolf_roar_01.png"
+        ],
+        "fps": 8,
+        "loop": true,
+        "anchor": [
+          30,
+          56
+        ]
+      }
+    },
+    "villain": {
+      "idle": {
+        "frames": [
+          "res://assets/art/villain/villain_idle_00.png",
+          "res://assets/art/villain/villain_idle_01.png",
+          "res://assets/art/villain/villain_idle_02.png",
+          "res://assets/art/villain/villain_idle_03.png"
+        ],
+        "fps": 6,
+        "loop": true,
+        "anchor": [
+          21,
+          64
+        ]
+      },
+      "cast": {
+        "frames": [
+          "res://assets/art/villain/villain_cast_00.png",
+          "res://assets/art/villain/villain_cast_01.png",
+          "res://assets/art/villain/villain_cast_02.png",
+          "res://assets/art/villain/villain_cast_03.png"
+        ],
+        "fps": 10,
+        "loop": false,
+        "anchor": [
+          16,
+          63
+        ]
+      },
+      "transform": {
+        "frames": [
+          "res://assets/art/villain/villain_transform_00.png",
+          "res://assets/art/villain/villain_transform_01.png",
+          "res://assets/art/villain/villain_transform_02.png",
+          "res://assets/art/villain/villain_transform_03.png",
+          "res://assets/art/villain/villain_transform_04.png",
+          "res://assets/art/villain/villain_transform_05.png"
+        ],
+        "fps": 8,
+        "loop": false,
+        "anchor": [
+          21,
+          64
+        ]
+      }
+    },
+    "wraith": {
+      "idle": {
+        "frames": [
+          "res://assets/art/villain/wraith_idle_00.png",
+          "res://assets/art/villain/wraith_idle_01.png",
+          "res://assets/art/villain/wraith_idle_02.png",
+          "res://assets/art/villain/wraith_idle_03.png"
+        ],
+        "fps": 6,
+        "loop": true,
+        "anchor": [
+          24,
+          72
+        ]
+      },
+      "cast": {
+        "frames": [
+          "res://assets/art/villain/wraith_cast_00.png",
+          "res://assets/art/villain/wraith_cast_01.png",
+          "res://assets/art/villain/wraith_cast_02.png",
+          "res://assets/art/villain/wraith_cast_03.png"
+        ],
+        "fps": 10,
+        "loop": false,
+        "anchor": [
+          24,
+          72
+        ]
+      }
+    }
+  },
+  "vfx": {
+    "bolt": {
+      "frames": [
+        "res://assets/art/vfx/vfx_bolt_00.png",
+        "res://assets/art/vfx/vfx_bolt_01.png",
+        "res://assets/art/vfx/vfx_bolt_02.png",
+        "res://assets/art/vfx/vfx_bolt_03.png",
+        "res://assets/art/vfx/vfx_bolt_04.png",
+        "res://assets/art/vfx/vfx_bolt_05.png"
+      ],
+      "fps": 16,
+      "loop": true,
+      "anchor": [
+        16,
+        13
+      ]
+    },
+    "boss_orb": {
+      "frames": [
+        "res://assets/art/vfx/vfx_boss_orb_00.png",
+        "res://assets/art/vfx/vfx_boss_orb_01.png",
+        "res://assets/art/vfx/vfx_boss_orb_02.png",
+        "res://assets/art/vfx/vfx_boss_orb_03.png"
+      ],
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        9,
+        19
+      ]
+    },
+    "hit_spark": {
+      "frames": [
+        "res://assets/art/vfx/vfx_hit_spark_00.png",
+        "res://assets/art/vfx/vfx_hit_spark_01.png",
+        "res://assets/art/vfx/vfx_hit_spark_02.png",
+        "res://assets/art/vfx/vfx_hit_spark_03.png",
+        "res://assets/art/vfx/vfx_hit_spark_04.png",
+        "res://assets/art/vfx/vfx_hit_spark_05.png"
+      ],
+      "fps": 24,
+      "loop": false,
+      "anchor": [
+        5,
+        11
+      ]
+    },
+    "death_puff": {
+      "frames": [
+        "res://assets/art/vfx/vfx_death_puff_00.png",
+        "res://assets/art/vfx/vfx_death_puff_01.png",
+        "res://assets/art/vfx/vfx_death_puff_02.png",
+        "res://assets/art/vfx/vfx_death_puff_03.png",
+        "res://assets/art/vfx/vfx_death_puff_04.png",
+        "res://assets/art/vfx/vfx_death_puff_05.png"
+      ],
+      "fps": 18,
+      "loop": false,
+      "anchor": [
+        17,
+        32
+      ]
+    },
+    "explosion": {
+      "frames": [
+        "res://assets/art/vfx/vfx_explosion_00.png",
+        "res://assets/art/vfx/vfx_explosion_01.png",
+        "res://assets/art/vfx/vfx_explosion_02.png",
+        "res://assets/art/vfx/vfx_explosion_03.png",
+        "res://assets/art/vfx/vfx_explosion_04.png",
+        "res://assets/art/vfx/vfx_explosion_05.png"
+      ],
+      "fps": 18,
+      "loop": false,
+      "anchor": [
+        27,
+        48
+      ]
+    },
+    "spawn_warning": {
+      "frames": [
+        "res://assets/art/vfx/vfx_spawn_warning_00.png",
+        "res://assets/art/vfx/vfx_spawn_warning_01.png",
+        "res://assets/art/vfx/vfx_spawn_warning_02.png",
+        "res://assets/art/vfx/vfx_spawn_warning_03.png"
+      ],
+      "fps": 10,
+      "loop": true,
+      "anchor": [
+        11,
+        22
+      ]
+    },
+    "teleport": {
+      "frames": [
+        "res://assets/art/vfx/vfx_teleport_00.png",
+        "res://assets/art/vfx/vfx_teleport_01.png",
+        "res://assets/art/vfx/vfx_teleport_02.png",
+        "res://assets/art/vfx/vfx_teleport_03.png",
+        "res://assets/art/vfx/vfx_teleport_04.png",
+        "res://assets/art/vfx/vfx_teleport_05.png"
+      ],
+      "fps": 16,
+      "loop": false,
+      "anchor": [
+        19,
+        64
+      ]
+    },
+    "muzzle": {
+      "frames": [
+        "res://assets/art/vfx/vfx_muzzle_00.png",
+        "res://assets/art/vfx/vfx_muzzle_01.png",
+        "res://assets/art/vfx/vfx_muzzle_02.png",
+        "res://assets/art/vfx/vfx_muzzle_03.png",
+        "res://assets/art/vfx/vfx_muzzle_04.png",
+        "res://assets/art/vfx/vfx_muzzle_05.png"
+      ],
+      "fps": 30,
+      "loop": false,
+      "anchor": [
+        7,
+        15
+      ]
+    },
+    "level_up": {
+      "frames": [
+        "res://assets/art/vfx/vfx_level_up_00.png",
+        "res://assets/art/vfx/vfx_level_up_01.png",
+        "res://assets/art/vfx/vfx_level_up_02.png",
+        "res://assets/art/vfx/vfx_level_up_03.png",
+        "res://assets/art/vfx/vfx_level_up_04.png",
+        "res://assets/art/vfx/vfx_level_up_05.png"
+      ],
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        18,
+        64
+      ]
+    },
+    "lumos_orb": {
+      "frames": [
+        "res://assets/art/vfx/vfx_lumos_orb_00.png",
+        "res://assets/art/vfx/vfx_lumos_orb_01.png",
+        "res://assets/art/vfx/vfx_lumos_orb_02.png",
+        "res://assets/art/vfx/vfx_lumos_orb_03.png"
+      ],
+      "fps": 8,
+      "loop": true,
+      "anchor": [
+        6,
+        13
+      ]
+    },
+    "beam": {
+      "frames": [
+        "res://assets/art/vfx/vfx_beam_00.png",
+        "res://assets/art/vfx/vfx_beam_01.png",
+        "res://assets/art/vfx/vfx_beam_02.png",
+        "res://assets/art/vfx/vfx_beam_03.png"
+      ],
+      "fps": 16,
+      "loop": true,
+      "anchor": null
+    },
+    "shockwave": {
+      "frames": [
+        "res://assets/art/vfx/vfx_shockwave_00.png",
+        "res://assets/art/vfx/vfx_shockwave_01.png",
+        "res://assets/art/vfx/vfx_shockwave_02.png",
+        "res://assets/art/vfx/vfx_shockwave_03.png",
+        "res://assets/art/vfx/vfx_shockwave_04.png",
+        "res://assets/art/vfx/vfx_shockwave_05.png"
+      ],
+      "fps": 14,
+      "loop": true,
+      "anchor": null
+    }
+  },
+  "level_art": {
+    "_comment": "Arte por nivel. Lo escribe tools/art/generate_art.py (segments, floor_rows).",
+    "segment_width_px": 720,
+    "segment_height_px": 240,
+    "far_parallax": 0.2,
+    "seam_cover_sink": 24.0,
+    "forest": {
+      "far": "res://assets/art/level/far_background.png",
+      "seam_cover": "res://assets/art/level/fg_tree.png",
+      "segments": [
+        "res://assets/art/level/segment_0.png",
+        "res://assets/art/level/segment_1.png",
+        "res://assets/art/level/segment_2.png"
+      ],
+      "floor_rows": [
+        200,
+        200,
+        200
+      ]
+    },
+    "cave": {
+      "far": null,
+      "seam_cover": null,
+      "segments": [
+        "res://assets/art/level/segment_cave_0.png",
+        "res://assets/art/level/segment_cave_1.png",
+        "res://assets/art/level/segment_cave_2.png",
+        "res://assets/art/level/segment_cave_3.png"
+      ],
+      "floor_rows": [
+        210,
+        212,
+        212,
+        214
+      ],
+      "glow_points": [
+        [
+          [
+            161,
+            163,
+            236,
+            252,
+            253
+          ],
+          [
+            699,
+            112,
+            227,
+            252,
+            251
+          ],
+          [
+            656,
+            190,
+            227,
+            252,
+            252
+          ],
+          [
+            304,
+            194,
+            222,
+            252,
+            253
+          ],
+          [
+            560,
+            131,
+            217,
+            253,
+            252
+          ],
+          [
+            689,
+            129,
+            222,
+            251,
+            251
+          ],
+          [
+            169,
+            151,
+            192,
+            252,
+            252
+          ],
+          [
+            183,
+            169,
+            188,
+            252,
+            252
+          ],
+          [
+            376,
+            196,
+            185,
+            251,
+            251
+          ],
+          [
+            673,
+            171,
+            183,
+            249,
+            251
+          ],
+          [
+            118,
+            88,
+            171,
+            251,
+            254
+          ],
+          [
+            694,
+            110,
+            185,
+            246,
+            248
+          ],
+          [
+            647,
+            197,
+            178,
+            247,
+            248
+          ],
+          [
+            193,
+            178,
+            163,
+            252,
+            251
+          ]
+        ],
+        [
+          [
+            167,
+            92,
+            232,
+            250,
+            251
+          ],
+          [
+            137,
+            152,
+            228,
+            250,
+            251
+          ],
+          [
+            113,
+            145,
+            227,
+            249,
+            250
+          ],
+          [
+            496,
+            141,
+            212,
+            254,
+            254
+          ],
+          [
+            636,
+            107,
+            218,
+            247,
+            248
+          ],
+          [
+            467,
+            102,
+            201,
+            252,
+            251
+          ],
+          [
+            111,
+            143,
+            207,
+            248,
+            251
+          ],
+          [
+            173,
+            106,
+            204,
+            249,
+            250
+          ],
+          [
+            622,
+            128,
+            203,
+            248,
+            253
+          ],
+          [
+            128,
+            134,
+            205,
+            245,
+            250
+          ],
+          [
+            330,
+            75,
+            193,
+            248,
+            251
+          ],
+          [
+            29,
+            154,
+            188,
+            248,
+            251
+          ],
+          [
+            649,
+            120,
+            196,
+            243,
+            248
+          ],
+          [
+            702,
+            160,
+            180,
+            250,
+            252
+          ]
+        ],
+        [
+          [
+            555,
+            158,
+            230,
+            254,
+            254
+          ],
+          [
+            25,
+            160,
+            230,
+            252,
+            252
+          ],
+          [
+            655,
+            126,
+            228,
+            252,
+            253
+          ],
+          [
+            153,
+            105,
+            224,
+            251,
+            252
+          ],
+          [
+            625,
+            117,
+            226,
+            251,
+            253
+          ],
+          [
+            45,
+            141,
+            226,
+            250,
+            252
+          ],
+          [
+            630,
+            132,
+            231,
+            249,
+            251
+          ],
+          [
+            704,
+            175,
+            224,
+            249,
+            250
+          ],
+          [
+            609,
+            141,
+            209,
+            253,
+            253
+          ],
+          [
+            82,
+            147,
+            202,
+            252,
+            253
+          ],
+          [
+            338,
+            188,
+            207,
+            250,
+            252
+          ],
+          [
+            56,
+            146,
+            214,
+            246,
+            248
+          ],
+          [
+            548,
+            165,
+            203,
+            251,
+            251
+          ],
+          [
+            154,
+            175,
+            196,
+            251,
+            252
+          ]
+        ],
+        [
+          [
+            47,
+            129,
+            251,
+            254,
+            255
+          ],
+          [
+            692,
+            130,
+            252,
+            253,
+            253
+          ],
+          [
+            48,
+            129,
+            242,
+            254,
+            254
+          ],
+          [
+            669,
+            154,
+            245,
+            251,
+            253
+          ],
+          [
+            546,
+            141,
+            235,
+            254,
+            254
+          ],
+          [
+            155,
+            105,
+            231,
+            254,
+            254
+          ],
+          [
+            34,
+            148,
+            240,
+            250,
+            253
+          ],
+          [
+            330,
+            130,
+            230,
+            253,
+            253
+          ],
+          [
+            559,
+            129,
+            234,
+            251,
+            253
+          ],
+          [
+            696,
+            125,
+            238,
+            249,
+            254
+          ],
+          [
+            74,
+            167,
+            231,
+            253,
+            254
+          ],
+          [
+            57,
+            145,
+            231,
+            251,
+            252
+          ],
+          [
+            679,
+            147,
+            241,
+            247,
+            251
+          ],
+          [
+            486,
+            174,
+            230,
+            252,
+            253
+          ]
+        ]
+      ]
+    },
+    "graveyard": {
+      "far": "res://assets/art/level/graveyard_far.png",
+      "seam_cover": null,
+      "segments": [
+        "res://assets/art/level/segment_graveyard_0.png",
+        "res://assets/art/level/segment_graveyard_arena.png"
+      ],
+      "floor_rows": [
+        196,
+        202
+      ]
+    },
+    "glow_light": {
+      "_comment": "Luces automáticas en los puntos que brillan del arte (cristales). radius en px de pantalla.",
+      "radius": 150.0,
+      "energy": 0.9,
+      "max_per_segment": 14
+    }
+  },
+  "render": {
+    "_comment": "Todo el arte es pixel art real; Godot lo agranda por este factor entero (filtro nearest).",
+    "pixel_scale": 3
+  },
+  "progression": {
+    "_comment": "Por partida: XP para pasar del nivel n al n+1 = xp_base * xp_growth^(n-1). Cada nivel ofrece 'cards_per_offer' cartas.",
+    "xp_base": 60,
+    "xp_growth": 1.3,
+    "max_level": 30,
+    "cards_per_offer": 3,
+    "pick_click_delay": 0.5,
+    "pick_time": 10.0
+  },
+  "ui": {
+    "_comment": "Estilo de la interfaz. Las imágenes salen de GPT Image (ui.*); la fuente es Pixelify Sans (OFL).",
+    "font": "res://assets/fonts/PixelifySans.ttf",
+    "font_size_small": 18,
+    "font_size": 24,
+    "font_size_big": 40,
+    "font_size_huge": 72,
+    "panel_margin": 6,
+    "icon_size": 64,
+    "text": [
+      0.96,
+      0.93,
+      0.86,
+      1
+    ],
+    "accent": [
+      1.0,
+      0.82,
+      0.36,
+      1
+    ],
+    "danger": [
+      1.0,
+      0.36,
+      0.4,
+      1
+    ],
+    "xp_fill": [
+      0.45,
+      0.85,
+      1.0,
+      1
+    ],
+    "crosshair": "res://assets/art/ui/crosshair.png",
+    "panel": "res://assets/art/ui/panel.png",
+    "bar": "res://assets/art/ui/bar.png",
+    "icons": {
+      "frames": [
+        "res://assets/art/ui/ui_icons_00.png",
+        "res://assets/art/ui/ui_icons_01.png",
+        "res://assets/art/ui/ui_icons_02.png",
+        "res://assets/art/ui/ui_icons_03.png",
+        "res://assets/art/ui/ui_icons_04.png",
+        "res://assets/art/ui/ui_icons_05.png",
+        "res://assets/art/ui/ui_icons_06.png",
+        "res://assets/art/ui/ui_icons_07.png",
+        "res://assets/art/ui/ui_icons_08.png",
+        "res://assets/art/ui/ui_icons_09.png",
+        "res://assets/art/ui/ui_icons_10.png",
+        "res://assets/art/ui/ui_icons_11.png"
+      ],
+      "fps": 1,
+      "loop": false,
+      "anchor": null
+    },
+    "tree_background": "res://assets/art/ui/tree_background.png",
+    "icon_index": {
+      "_comment": "Posición de cada ícono en la grilla ui_icons (ver el orden en tools/art/asset_manifest.json).",
+      "bolt_rapid": 0,
+      "bolt_pierce": 1,
+      "bolt_fan": 2,
+      "move_double_jump": 3,
+      "move_dash": 4,
+      "move_triple_jump": 5,
+      "lev_quick": 6,
+      "lev_explode": 7,
+      "lev_heavy": 8,
+      "spell_bolt": 9,
+      "spell_levitate": 10,
+      "xp": 11,
+      "heart": 12,
+      "nova": 13,
+      "lumos": 14,
+      "power": 15
+    },
+    "icons_2": {
+      "frames": [
+        "res://assets/art/ui/ui_icons_2_00.png",
+        "res://assets/art/ui/ui_icons_2_01.png",
+        "res://assets/art/ui/ui_icons_2_02.png",
+        "res://assets/art/ui/ui_icons_2_03.png"
+      ],
+      "fps": 1,
+      "loop": false,
+      "anchor": null
+    },
+    "enemy_bar": {
+      "width": 90,
+      "height": 10,
+      "offset": 18
+    },
+    "title": {
+      "_comment": "Pantalla de título: arte de fondo, pista de música y ritmo del pulso/relámpago.",
+      "backdrop": "res://assets/art/ui/title_backdrop.png",
+      "music_id": "boss",
+      "pulse_speed": 1.6,
+      "pulse_amount": 0.05,
+      "lightning_min_interval": 4.0,
+      "lightning_max_interval": 11.0,
+      "lightning_flash_time": 0.12,
+      "lightning_color": [
+        0.75,
+        0.82,
+        1.0,
+        0.35
+      ]
+    }
+  },
+  "upgrades": {
+    "_comment": "Mazo de mejoras (persisten al morir). effects se SUMAN por cada vez que se toma la carta (hasta max_stacks). requires = otra carta antes; requires_flag = condición del mundo (entered_dark = ya entraste a la cueva). max_owned = tope de mejoras a la vez; al llenarse, una carta nueva reemplaza a otra o conservas las tuyas.",
+    "categories": {
+      "bolt": "Fulgor",
+      "move": "Movilidad",
+      "levitate": "Aerum",
+      "life": "Vida",
+      "light": "Luz"
+    },
+    "pool": [
+      {
+        "id": "bolt_rapid",
+        "name": "Fulgor Veloz",
+        "category": "bolt",
+        "description": "Recarga de Fulgor -25%.",
+        "icon": "bolt_rapid",
+        "max_stacks": 3,
+        "effects": {
+          "bolt.cooldown": -0.06
+        }
+      },
+      {
+        "id": "bolt_pierce",
+        "name": "Fulgor Perforante",
+        "category": "bolt",
+        "description": "Cada rayo atraviesa 1 enemigo más.",
+        "icon": "bolt_pierce",
+        "max_stacks": 3,
+        "effects": {
+          "bolt.pierce": 1
+        }
+      },
+      {
+        "id": "bolt_fan",
+        "name": "Abanico de Fulgor",
+        "category": "bolt",
+        "description": "+1 rayo por disparo: 2 rayos en total.",
+        "icon": "bolt_fan",
+        "max_stacks": 1,
+        "effects": {
+          "bolt.shots": 1
+        }
+      },
+      {
+        "id": "bolt_power",
+        "name": "Fulgor Potente",
+        "category": "bolt",
+        "description": "+1 de daño por rayo.",
+        "icon": "power",
+        "max_stacks": 3,
+        "effects": {
+          "bolt.damage": 1
+        },
+        "requires_flag": "entered_cave"
+      },
+      {
+        "id": "move_double_jump",
+        "name": "Salto Etéreo",
+        "category": "move",
+        "description": "+1 salto en el aire.",
+        "icon": "move_double_jump",
+        "max_stacks": 2,
+        "effects": {
+          "move.air_jumps": 1
+        }
+      },
+      {
+        "id": "move_speed",
+        "name": "Pies Ligeros",
+        "category": "move",
+        "description": "+15% velocidad de carrera.",
+        "icon": "move_triple_jump",
+        "max_stacks": 3,
+        "effects": {
+          "move.speed_mult": 0.15
+        }
+      },
+      {
+        "id": "move_dash_cd",
+        "name": "Paso Rápido",
+        "category": "move",
+        "description": "Recarga del dash -30%.",
+        "icon": "move_dash",
+        "max_stacks": 2,
+        "effects": {
+          "move.dash_cooldown": -0.13
+        }
+      },
+      {
+        "id": "move_dash_heavy",
+        "name": "Paso Letal",
+        "category": "move",
+        "description": "El dash también destruye hombres lobo.",
+        "icon": "move_dash",
+        "max_stacks": 1,
+        "effects": {
+          "move.dash_heavy": 1
+        }
+      },
+      {
+        "id": "lev_quick",
+        "name": "Aerum Ágil",
+        "category": "levitate",
+        "description": "Recarga de Aerum -40%.",
+        "icon": "lev_quick",
+        "max_stacks": 2,
+        "effects": {
+          "levitate.cooldown": -0.45
+        }
+      },
+      {
+        "id": "lev_explode",
+        "name": "Aerum Estallido",
+        "category": "levitate",
+        "description": "Lo que arrojas explota al impactar.",
+        "icon": "lev_explode",
+        "max_stacks": 1,
+        "effects": {
+          "levitate.explode": 1
+        }
+      },
+      {
+        "id": "lev_heavy",
+        "name": "Aerum Titánico",
+        "category": "levitate",
+        "description": "Puedes levantar y arrojar hombres lobo.",
+        "icon": "lev_heavy",
+        "max_stacks": 1,
+        "effects": {
+          "levitate.heavy": 1
+        },
+        "requires": "lev_explode"
+      },
+      {
+        "id": "heart",
+        "name": "Corazón de Roble",
+        "category": "life",
+        "description": "+1 corazón: aguantas un golpe más.",
+        "icon": "heart",
+        "max_stacks": 3,
+        "effects": {
+          "player.max_hearts": 1
+        }
+      },
+      {
+        "id": "nova",
+        "name": "Nova de Fulgor",
+        "category": "bolt",
+        "description": "Nuevo hechizo [E]: 6 rayos en todas direcciones.",
+        "icon": "nova",
+        "max_stacks": 1,
+        "effects": {
+          "nova.unlocked": 1
+        }
+      },
+      {
+        "id": "nova_plus",
+        "name": "Nova Ampliada",
+        "category": "bolt",
+        "description": "Nova dispara +3 rayos más.",
+        "icon": "nova",
+        "max_stacks": 2,
+        "effects": {
+          "nova.count": 3
+        },
+        "requires": "nova"
+      },
+      {
+        "id": "lumos_radius",
+        "name": "Lumos Intenso",
+        "category": "light",
+        "description": "La luz de Lumos ilumina +40% más lejos.",
+        "icon": "lumos",
+        "max_stacks": 2,
+        "effects": {
+          "lumos.radius_mult": 0.4
+        },
+        "requires_flag": "entered_dark"
+      },
+      {
+        "id": "lumos_duration",
+        "name": "Lumos Duradero",
+        "category": "light",
+        "description": "Lumos dura +5 segundos.",
+        "icon": "lumos",
+        "max_stacks": 2,
+        "effects": {
+          "lumos.duration": 5.0
+        },
+        "requires_flag": "entered_dark"
+      }
+    ],
+    "max_owned": 4
+  },
+  "levels": [
+    {
+      "id": "forest",
+      "art": "forest",
+      "title": "Nivel 1 — El Bosque Umbrío",
+      "intro": "Perdido en el bosque prohibido... algo se mueve entre los árboles. Avanza hacia la derecha.",
+      "outro": "Encontraste la entrada de una cueva...",
+      "fallback_length": 6480,
+      "dark_zones": [],
+      "flags_on_enter": [],
+      "encounters": [
+        {
+          "at_x": 900,
+          "title": "Susurros en la maleza",
+          "groups": [
+            {
+              "type": "spider",
+              "mode": "side",
+              "count": 4,
+              "interval": 1.0,
+              "delay": 0.0,
+              "side": "alternate"
+            },
+            {
+              "type": "spider",
+              "mode": "ceiling",
+              "count": 2,
+              "interval": 1.2,
+              "delay": 2.0
+            }
+          ]
+        },
+        {
+          "at_x": 2300,
+          "title": "Lluvia de patas",
+          "groups": [
+            {
+              "type": "spider",
+              "mode": "ceiling",
+              "count": 8,
+              "interval": 0.55,
+              "delay": 0.0
+            },
+            {
+              "type": "spider",
+              "mode": "side",
+              "count": 3,
+              "interval": 1.3,
+              "delay": 2.0,
+              "side": "alternate"
+            }
+          ]
+        },
+        {
+          "at_x": 3700,
+          "title": "Desde la tierra",
+          "groups": [
+            {
+              "type": "spider",
+              "mode": "burrow",
+              "count": 4,
+              "interval": 1.0,
+              "delay": 0.0
+            },
+            {
+              "type": "spider",
+              "mode": "ceiling",
+              "count": 4,
+              "interval": 0.7,
+              "delay": 1.8
+            },
+            {
+              "type": "spider",
+              "mode": "side",
+              "count": 3,
+              "interval": 1.2,
+              "delay": 3.5,
+              "side": "alternate"
+            }
+          ]
+        },
+        {
+          "at_x": 5200,
+          "title": "El nido",
+          "groups": [
+            {
+              "type": "spider",
+              "mode": "ceiling",
+              "count": 8,
+              "interval": 0.5,
+              "delay": 0.0
+            },
+            {
+              "type": "spider",
+              "mode": "burrow",
+              "count": 4,
+              "interval": 0.9,
+              "delay": 1.5
+            },
+            {
+              "type": "spider",
+              "mode": "side",
+              "count": 4,
+              "interval": 1.0,
+              "delay": 3.0,
+              "side": "alternate"
+            }
+          ]
+        }
+      ],
+      "music": {
+        "calm": "forest",
+        "tension": "tension"
+      }
+    },
+    {
+      "id": "cave",
+      "art": "cave",
+      "title": "Nivel 2 — La Cueva de los Aullidos",
+      "intro": "La cueva huele a lobo. Está oscura: usa Lumos [F].",
+      "outro": "Una salida... y más allá, un cementerio bajo la tormenta.",
+      "fallback_length": 8640,
+      "dark_zones": [
+        [
+          0,
+          8640
+        ]
+      ],
+      "flags_on_enter": [
+        "entered_dark",
+        "entered_cave"
+      ],
+      "encounters": [
+        {
+          "at_x": 1100,
+          "title": "El primer aullido",
+          "groups": [
+            {
+              "type": "werewolf",
+              "mode": "side",
+              "count": 1,
+              "interval": 0.0,
+              "delay": 0.0,
+              "side": "right"
+            },
+            {
+              "type": "spider",
+              "mode": "side",
+              "count": 3,
+              "interval": 1.3,
+              "delay": 2.0,
+              "side": "alternate"
+            }
+          ]
+        },
+        {
+          "at_x": 3000,
+          "title": "La cueva de los susurros",
+          "groups": [
+            {
+              "type": "spider",
+              "mode": "ceiling",
+              "count": 6,
+              "interval": 0.7,
+              "delay": 0.0
+            },
+            {
+              "type": "werewolf",
+              "mode": "side",
+              "count": 1,
+              "interval": 0.0,
+              "delay": 1.5,
+              "side": "left"
+            },
+            {
+              "type": "spider",
+              "mode": "side",
+              "count": 3,
+              "interval": 1.1,
+              "delay": 3.0,
+              "side": "alternate"
+            }
+          ]
+        },
+        {
+          "at_x": 5000,
+          "title": "La manada",
+          "groups": [
+            {
+              "type": "werewolf",
+              "mode": "side",
+              "count": 2,
+              "interval": 3.5,
+              "delay": 0.0,
+              "side": "alternate"
+            },
+            {
+              "type": "spider",
+              "mode": "burrow",
+              "count": 4,
+              "interval": 0.9,
+              "delay": 1.0
+            },
+            {
+              "type": "spider",
+              "mode": "ceiling",
+              "count": 4,
+              "interval": 0.6,
+              "delay": 3.0
+            }
+          ]
+        },
+        {
+          "at_x": 7000,
+          "title": "Ojos en la oscuridad",
+          "groups": [
+            {
+              "type": "werewolf",
+              "mode": "side",
+              "count": 2,
+              "interval": 3.0,
+              "delay": 0.0,
+              "side": "alternate"
+            },
+            {
+              "type": "spider",
+              "mode": "ceiling",
+              "count": 6,
+              "interval": 0.55,
+              "delay": 1.0
+            },
+            {
+              "type": "spider",
+              "mode": "side",
+              "count": 4,
+              "interval": 0.9,
+              "delay": 3.0,
+              "side": "alternate"
+            }
+          ]
+        }
+      ],
+      "darkness": {
+        "outside": 1.0,
+        "inside": 0.22,
+        "fade": 2.0
+      },
+      "music": {
+        "calm": "cave",
+        "tension": "tension"
+      }
+    },
+    {
+      "id": "graveyard",
+      "art": "graveyard",
+      "title": "Nivel 3 — El Cementerio de la Tormenta",
+      "intro": "Las lápidas tiemblan. Alguien te está esperando.",
+      "outro": "",
+      "fallback_length": 4320,
+      "dark_zones": [],
+      "flags_on_enter": [
+        "entered_cave"
+      ],
+      "encounters": [
+        {
+          "at_x": 900,
+          "title": "Los guardianes",
+          "groups": [
+            {
+              "type": "spider",
+              "mode": "burrow",
+              "count": 4,
+              "interval": 0.9,
+              "delay": 0.0
+            },
+            {
+              "type": "werewolf",
+              "mode": "side",
+              "count": 1,
+              "interval": 0.0,
+              "delay": 1.5,
+              "side": "right"
+            }
+          ]
+        }
+      ],
+      "boss": {
+        "_comment": "Morvane. Fases 1-2: hechicero; fase 3: espectro (form 'wraith'). Cada fase repite 'pattern'.",
+        "trigger_offset": 150.0,
+        "hp": 90,
+        "points": 8000,
+        "size": [
+          120,
+          330
+        ],
+        "hover_height": 10.0,
+        "anchors": [
+          0.2,
+          0.5,
+          0.8
+        ],
+        "orb_radius": 24.0,
+        "cast_windup": 0.35,
+        "cast_anim_time": 0.5,
+        "volley_spread_degrees": 14.0,
+        "rain_warning": 0.7,
+        "teleport_time": 0.5,
+        "phases": [
+          {
+            "form": "sorcerer",
+            "until_ratio": 0.66,
+            "interval": 1.8,
+            "first_delay": 1.5,
+            "pattern": [
+              "volley",
+              "volley",
+              "teleport"
+            ],
+            "volley_count": 3,
+            "orb_speed": 460.0
+          },
+          {
+            "form": "sorcerer",
+            "until_ratio": 0.33,
+            "interval": 1.6,
+            "first_delay": 0.8,
+            "pattern": [
+              "shockwave",
+              "summon",
+              "volley",
+              "teleport",
+              "rain"
+            ],
+            "volley_count": 5,
+            "orb_speed": 500.0,
+            "summon_count": 2,
+            "rain_count": 5
+          },
+          {
+            "form": "wraith",
+            "until_ratio": 0.0,
+            "interval": 1.5,
+            "first_delay": 1.2,
+            "pattern": [
+              "beam",
+              "rain",
+              "volley",
+              "beam",
+              "shockwave"
+            ],
+            "volley_count": 5,
+            "orb_speed": 560.0,
+            "rain_count": 6
+          }
+        ],
+        "xp": 400,
+        "checkpoint_offset": 60.0,
+        "art_scale": 2.0,
+        "intro_time": 2.4,
+        "shockwave_speed": 620.0,
+        "shockwave_height": 60.0,
+        "shockwave_width": 90.0,
+        "beam_warning": 0.9,
+        "beam_time": 0.9,
+        "beam_heights": [
+          40.0,
+          230.0
+        ],
+        "beam_thickness": 90.0,
+        "lightning_interval": [
+          4.0,
+          8.0
+        ],
+        "lightning_flash": 0.18,
+        "music": "boss"
+      },
+      "music": {
+        "calm": "cave",
+        "tension": "tension"
+      }
+    }
+  ],
+  "audio": {
+    "_comment": "Rutas (music/sfx) las escribe tools/audio/generate_audio.py. La música mezcla una pista tranquila y una de tensión según la intensidad del combate.",
+    "volumes": {
+      "music_db": -8.0,
+      "sfx_db": -4.0
+    },
+    "sfx_gain_db": {
+      "_comment": "Ajuste por efecto (dB), sumado a volumes.sfx_db. Nivela los efectos a -18 LUFS: ElevenLabs los entrega con volúmenes muy distintos (el aullido del lobo salió a -3 LUFS y el rayo a -22). Solo se bajan los fuertes, nunca se suben, para no saturar.",
+      "boss_beam": -5.5,
+      "boss_cast": -7.0,
+      "boss_death": -12.0,
+      "boss_hurt": -10.5,
+      "boss_intro": -8.5,
+      "boss_orb": -4.0,
+      "boss_shockwave": -7.5,
+      "boss_teleport": -2.5,
+      "boss_transform": -15.5,
+      "dash": -1.0,
+      "explosion": -6.5,
+      "level_complete": -8.5,
+      "levitate": -1.5,
+      "lumos": -2.5,
+      "nova": -7.0,
+      "player_death": -9.5,
+      "player_hurt": -6.0,
+      "spider_death": -6.5,
+      "spider_spawn": -4.0,
+      "throw": -5.5,
+      "warning": -9.5,
+      "wolf_death": -14.0,
+      "wolf_hurt": -10.5,
+      "wolf_roar": -15.0
+    },
+    "intensity": {
+      "danger_range": 650.0,
+      "fight_floor": 0.55,
+      "rise": 2.0,
+      "fall": 0.35
+    },
+    "sfx_voices": 12,
+    "sfx_min_interval": 0.06,
+    "pitch_jitter": 0.06,
+    "music": {
+      "forest": "res://assets/audio/music/forest.mp3",
+      "cave": "res://assets/audio/music/cave.mp3",
+      "tension": "res://assets/audio/music/tension.mp3",
+      "boss": "res://assets/audio/music/boss.mp3"
+    },
+    "sfx": {
+      "spider_death": "res://assets/audio/sfx/spider_death.mp3",
+      "bolt_cast": "res://assets/audio/sfx/bolt_cast.mp3",
+      "bolt_hit": "res://assets/audio/sfx/bolt_hit.mp3",
+      "nova": "res://assets/audio/sfx/nova.mp3",
+      "lumos": "res://assets/audio/sfx/lumos.mp3",
+      "dash": "res://assets/audio/sfx/dash.mp3",
+      "levitate": "res://assets/audio/sfx/levitate.mp3",
+      "throw": "res://assets/audio/sfx/throw.mp3",
+      "explosion": "res://assets/audio/sfx/explosion.mp3",
+      "spider_spawn": "res://assets/audio/sfx/spider_spawn.mp3",
+      "wolf_roar": "res://assets/audio/sfx/wolf_roar.mp3",
+      "wolf_hurt": "res://assets/audio/sfx/wolf_hurt.mp3",
+      "wolf_death": "res://assets/audio/sfx/wolf_death.mp3",
+      "boss_intro": "res://assets/audio/sfx/boss_intro.mp3",
+      "boss_cast": "res://assets/audio/sfx/boss_cast.mp3",
+      "boss_orb": "res://assets/audio/sfx/boss_orb.mp3",
+      "boss_teleport": "res://assets/audio/sfx/boss_teleport.mp3",
+      "boss_beam": "res://assets/audio/sfx/boss_beam.mp3",
+      "boss_shockwave": "res://assets/audio/sfx/boss_shockwave.mp3",
+      "boss_transform": "res://assets/audio/sfx/boss_transform.mp3",
+      "boss_hurt": "res://assets/audio/sfx/boss_hurt.mp3",
+      "boss_death": "res://assets/audio/sfx/boss_death.mp3",
+      "player_hurt": "res://assets/audio/sfx/player_hurt.mp3",
+      "player_death": "res://assets/audio/sfx/player_death.mp3",
+      "level_up": "res://assets/audio/sfx/level_up.mp3",
+      "card_pick": "res://assets/audio/sfx/card_pick.mp3",
+      "warning": "res://assets/audio/sfx/warning.mp3",
+      "checkpoint": "res://assets/audio/sfx/checkpoint.mp3",
+      "level_complete": "res://assets/audio/sfx/level_complete.mp3"
+    }
+  },
+  "settings": {
+    "_comment": "Valores por defecto de las opciones del jugador (volumen y pantalla completa). Se guardan aparte, en user://settings.json, nunca junto al progreso de la partida.",
+    "master_volume_default": 1.0,
+    "music_volume_default": 1.0,
+    "sfx_volume_default": 1.0,
+    "fullscreen_default": false
+  },
+  "controls": {
+    "_comment": "Filas de la pantalla de Controles (Título -> Controles, o Esc -> Controles).",
+    "rows": [
+      {
+        "action": "Moverse",
+        "key": "A / D o flechas"
+      },
+      {
+        "action": "Saltar",
+        "key": "W, Espacio o flecha arriba"
+      },
+      {
+        "action": "Dash",
+        "key": "Shift"
+      },
+      {
+        "action": "Fulgor (rayo)",
+        "key": "Clic izquierdo o J"
+      },
+      {
+        "action": "Aerum (levantar y lanzar enemigos)",
+        "key": "Clic derecho o K"
+      },
+      {
+        "action": "Nova (hechizo de área)",
+        "key": "E"
+      },
+      {
+        "action": "Lumos (luz; solo funciona en la oscuridad)",
+        "key": "F"
+      },
+      {
+        "action": "Elegir carta",
+        "key": "1 a 4, o clic"
+      },
+      {
+        "action": "Pausa",
+        "key": "Esc"
+      },
+      {
+        "action": "Reaparecer en el punto de control",
+        "key": "R"
+      },
+      {
+        "action": "Partida nueva",
+        "key": "N"
+      }
+    ]
+  }
+}

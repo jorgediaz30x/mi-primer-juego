@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estudio de assets</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/studio.css">
+</head>
+<body>
+<!-- Estudio de assets: la página la sirve tools/studio/server.py. Sin build, sin CDN: funciona sin internet. -->
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <div>
+      <h1>Estudio de assets</h1>
+      <p class="brand-sub">Arte con GPT Image, audio con ElevenLabs</p>
+    </div>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" data-tab="imagenes">Imágenes <span class="count" id="count-imagenes">0</span></button>
+    <button class="tab" role="tab" data-tab="audio">Audio <span class="count" id="count-audio">0</span></button>
+  </nav>
+  <label class="search">
+    <span class="sr-only">Buscar</span>
+    <input id="search" type="search" placeholder="Buscar por id o por prompt" autocomplete="off">
+    <kbd>/</kbd>
+  </label>
+  <button id="create-open" class="btn primary">Crear nuevo</button>
+  <button id="job-pill" class="job-pill" hidden></button>
+</header>
+
+<main>
+  <!-- Pestaña Imágenes -->
+  <section id="tab-imagenes" class="tab-page" hidden>
+    <aside class="sidebar">
+      <div class="filter-block">
+        <h3>Categoría</h3>
+        <div id="image-categories" class="filter-list"></div>
+      </div>
+      <div class="filter-block">
+        <h3>Estado</h3>
+        <div id="image-status" class="filter-list"></div>
+      </div>
+      <div class="filter-block">
+        <h3>Fondo</h3>
+        <div class="segmented" id="bg-switch">
+          <button data-bg="checker">Cuadros</button><button data-bg="dark">Oscuro</button><button data-bg="light">Claro</button>
+        </div>
+      </div>
+      <p class="sidebar-note" id="image-manifest"></p>
+    </aside>
+    <div class="content" id="image-groups"></div>
+  </section>
+
+  <!-- Pestaña Audio -->
+  <section id="tab-audio" class="tab-page" hidden>
+    <aside class="sidebar">
+      <div class="filter-block">
+        <h3>Sección</h3>
+        <div id="audio-sections" class="filter-list"></div>
+      </div>
+      <div class="filter-block">
+        <h3>Estado</h3>
+        <div id="audio-status" class="filter-list"></div>
+      </div>
+      <p class="sidebar-note" id="audio-manifest"></p>
+    </aside>
+    <div class="content" id="audio-groups"></div>
+  </section>
+</main>
+
+<!-- Panel de detalle de una imagen -->
+<div id="detail-backdrop" class="backdrop" hidden></div>
+<aside id="detail" class="detail" hidden aria-label="Detalle del asset"></aside>
+
+<!-- Formulario "Crear nuevo" -->
+<aside id="create" class="detail" hidden aria-label="Crear un asset nuevo"></aside>
+
+<!-- Registro de la generación en curso -->
+<section id="log" class="log" hidden>
+  <header class="log-head">
+    <strong id="log-title">Registro</strong>
+    <span id="log-status" class="chip"></span>
+    <span class="spacer"></span>
+    <button id="log-close" class="btn ghost small">Ocultar</button>
+  </header>
+  <pre id="log-body"></pre>
+</section>
+
+<!-- Confirmación antes de gastar créditos -->
+<dialog id="confirm" class="confirm">
+  <form method="dialog">
+    <h2 id="confirm-title"></h2>
+    <div id="confirm-body"></div>
+    <div class="confirm-actions">
+      <button value="cancel" class="btn ghost">Cancelar</button>
+      <button value="ok" class="btn primary" id="confirm-ok">Sí, generar</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" hidden></div>
+
+<script type="module" src="/static/app.js"></script>
+</body>
+</html>

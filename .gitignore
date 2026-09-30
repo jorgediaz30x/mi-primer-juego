@@ -171,3 +171,14 @@ $RECYCLE.BIN/
 # the project root. Anchored so a reports/ folder elsewhere stays tracked.
 /reports/
 /test-results/
+
+# Art pipeline outputs
+tools/art/generation_log.jsonl
+assets/art/_history/
+
+# Audio pipeline outputs
+tools/audio/generation_log.jsonl
+assets/audio/_history/
+
+# Crash dumps from Git Bash on Windows
+*.stackdump

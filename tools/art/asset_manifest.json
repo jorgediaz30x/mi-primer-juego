@@ -1,0 +1,838 @@
+{
+  "_comment": "Arte del juego pedido a GPT Image. 'style' se antepone a todo; 'sheet_rules' a las tiras de animación. 'reference' = ids ya generados que se mandan como referencia visual (van en orden: primero lo base). 'pixel_height' = alto en píxeles REALES del pixel art (en pantalla se multiplica por render.pixel_scale del game_config). 'link' = dónde se escribe el resultado en game_config.json. 'game_height' = alto en pantalla (solo informativo).",
+  "model": "gpt-image-2.5-flare",
+  "quality": "high",
+  "style": "High-quality 2D pixel art for a side-scrolling action game in the style of modern indie pixel art games. Crisp hard-edged square pixels, no anti-aliasing, no blur, no soft gradients. Clean dark outline around characters and creatures. Limited cohesive palette, consistent with any reference images. Original designs not based on any existing franchise. No text, no logos, no watermark.",
+  "sheet_rules": "Sprite sheet with exactly {frames} animation frames of the SAME subject shown in the reference image, arranged in a grid of {columns} columns by {rows} rows of equal-size cells, read left-to-right then top-to-bottom. In every frame: identical subject size and proportions, same outfit and colors, same ground baseline, fully inside its own cell with empty margin around it. Fully transparent background, no grid lines, no borders, no numbers, no text, no shadow, no glow.",
+  "assets": [
+    {
+      "id": "hero",
+      "kind": "static",
+      "link": "sprites.hero",
+      "out": "assets/art/hero/hero.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "pixel_height": 48,
+      "game_height": 144,
+      "prompt": "Full-body young wizard student in a hooded robe holding a wand, side view facing right, standing idle pose, single character centered, whole body visible. Original costume design: no round glasses, no scar, no school house crest, no striped tie or scarf. Isolated subject on a fully transparent background: no scenery, no ground, no shadow, no glow, no frame."
+    },
+    {
+      "id": "hero_idle",
+      "kind": "sheet",
+      "link": "animations.hero.idle",
+      "out_dir": "assets/art/hero",
+      "size": "1536x512",
+      "columns": 4,
+      "rows": 1,
+      "background": "transparent",
+      "reference": [
+        "hero"
+      ],
+      "pixel_height": 48,
+      "fps": 6,
+      "loop": true,
+      "game_height": 144,
+      "prompt": "Idle breathing loop of the young wizard, side view facing right, holding the wand, subtle up and down body motion and robe sway."
+    },
+    {
+      "id": "hero_run",
+      "kind": "sheet",
+      "link": "animations.hero.run",
+      "out_dir": "assets/art/hero",
+      "size": "1536x1024",
+      "columns": 4,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "hero"
+      ],
+      "pixel_height": 48,
+      "fps": 14,
+      "loop": true,
+      "game_height": 144,
+      "prompt": "Classic 8-frame side-view RUN cycle of the young wizard, facing right, wand held in the right hand, robe flowing behind. Frame 1 CONTACT: right leg stretched forward with the heel touching the ground, left leg stretched back, left arm forward. Frame 2 DOWN: right knee bent taking the weight, body at its LOWEST point, left leg bending behind. Frame 3 PASSING: right leg straight under the body, left knee lifted high and swinging forward past the right leg. Frame 4 UP: pushing off the right toes, body at its HIGHEST point, both feet almost off the ground, left leg reaching forward. Frames 5 to 8: the same four poses with the legs and arms swapped (left leg forward at contact). The legs must be in a clearly DIFFERENT position in every frame, arms swing opposite to the legs, the head and body bob up and down, the robe hem swings with each step.",
+      "model": "gpt-image-2.5-sunburst"
+    },
+    {
+      "id": "hero_jump",
+      "kind": "sheet",
+      "link": "animations.hero.jump",
+      "out_dir": "assets/art/hero",
+      "size": "1536x768",
+      "columns": 2,
+      "rows": 1,
+      "background": "transparent",
+      "reference": [
+        "hero"
+      ],
+      "pixel_height": 48,
+      "fps": 1,
+      "loop": false,
+      "game_height": 144,
+      "prompt": "Two jump poses of the young wizard, side view facing right: frame 1 rising upward with knees bent and robe lifted, frame 2 falling downward with legs extended and robe floating up."
+    },
+    {
+      "id": "hero_cast",
+      "kind": "sheet",
+      "link": "animations.hero.cast",
+      "out_dir": "assets/art/hero",
+      "size": "1536x512",
+      "columns": 3,
+      "rows": 1,
+      "background": "transparent",
+      "reference": [
+        "hero"
+      ],
+      "pixel_height": 48,
+      "fps": 18,
+      "loop": false,
+      "game_height": 144,
+      "prompt": "Spell casting motion of the young wizard, side view facing right: frame 1 wand pulled back, frame 2 arm thrusting forward, frame 3 arm fully extended pointing the wand forward with a small spark at its tip."
+    },
+    {
+      "id": "spider",
+      "kind": "static",
+      "link": "sprites.spider",
+      "out": "assets/art/spider/spider.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "reference": [
+        "hero"
+      ],
+      "pixel_height": 24,
+      "game_height": 72,
+      "prompt": "Giant shadow forest spider enemy with glowing eyes, side view facing right, whole body visible, single creature centered, menacing but not gory. Same pixel art style as the reference image. Isolated subject on a fully transparent background: no scenery, no ground, no shadow, no glow, no frame."
+    },
+    {
+      "id": "spider_crawl",
+      "kind": "sheet",
+      "link": "animations.spider.crawl",
+      "out_dir": "assets/art/spider",
+      "size": "1536x1024",
+      "columns": 3,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "spider"
+      ],
+      "pixel_height": 24,
+      "fps": 14,
+      "loop": true,
+      "game_height": 72,
+      "prompt": "Fast crawling walk cycle of the shadow spider, side view facing right, legs moving in alternating pairs."
+    },
+    {
+      "id": "werewolf",
+      "kind": "static",
+      "link": "sprites.werewolf",
+      "out": "assets/art/werewolf/werewolf.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "reference": [
+        "hero"
+      ],
+      "pixel_height": 56,
+      "game_height": 168,
+      "prompt": "Werewolf enemy standing on two legs, dark grey fur, yellow eyes, side view facing right, aggressive stance, whole body visible, single creature centered, no blood. Same pixel art style as the reference image. Isolated subject on a fully transparent background: no scenery, no ground, no shadow, no glow, no frame."
+    },
+    {
+      "id": "werewolf_walk",
+      "kind": "sheet",
+      "link": "animations.werewolf.walk",
+      "out_dir": "assets/art/werewolf",
+      "size": "1536x512",
+      "columns": 6,
+      "rows": 1,
+      "background": "transparent",
+      "reference": [
+        "werewolf"
+      ],
+      "pixel_height": 56,
+      "fps": 10,
+      "loop": true,
+      "game_height": 168,
+      "prompt": "Stalking walk cycle of the werewolf, side view facing right, hunched forward, claws ready."
+    },
+    {
+      "id": "werewolf_charge",
+      "kind": "sheet",
+      "link": "animations.werewolf.charge",
+      "out_dir": "assets/art/werewolf",
+      "size": "1536x512",
+      "columns": 4,
+      "rows": 1,
+      "background": "transparent",
+      "reference": [
+        "werewolf"
+      ],
+      "pixel_height": 56,
+      "fps": 14,
+      "loop": true,
+      "game_height": 168,
+      "prompt": "Charging sprint of the werewolf, side view facing right, body low and lunging forward, powerful leaping strides."
+    },
+    {
+      "id": "werewolf_roar",
+      "kind": "sheet",
+      "link": "animations.werewolf.roar",
+      "out_dir": "assets/art/werewolf",
+      "size": "1536x768",
+      "columns": 2,
+      "rows": 1,
+      "background": "transparent",
+      "reference": [
+        "werewolf"
+      ],
+      "pixel_height": 56,
+      "fps": 8,
+      "loop": true,
+      "game_height": 168,
+      "prompt": "Warning roar before a charge, side view facing right: frame 1 head pulled back, frame 2 jaws wide open roaring, arms spread."
+    },
+    {
+      "id": "villain",
+      "kind": "static",
+      "link": "sprites.villain",
+      "out": "assets/art/villain/villain.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "reference": [
+        "hero"
+      ],
+      "pixel_height": 64,
+      "game_height": 192,
+      "prompt": "Original dark sorcerer lord boss, tall figure in a tattered hooded cloak holding a twisted staff with a glowing crystal, side view facing right, menacing presence, whole body visible, single character centered. Must not resemble any famous fantasy villain: no snake-like noseless face, no bald pale head. Same pixel art style as the reference image. Isolated subject on a fully transparent background: no scenery, no ground, no shadow, no glow, no frame."
+    },
+    {
+      "id": "villain_idle",
+      "kind": "sheet",
+      "link": "animations.villain.idle",
+      "out_dir": "assets/art/villain",
+      "size": "1536x512",
+      "columns": 4,
+      "rows": 1,
+      "background": "transparent",
+      "reference": [
+        "villain"
+      ],
+      "pixel_height": 64,
+      "fps": 6,
+      "loop": true,
+      "game_height": 192,
+      "prompt": "Floating idle loop of the dark sorcerer, side view facing right, hovering slightly, cloak billowing, staff crystal pulsing."
+    },
+    {
+      "id": "villain_cast",
+      "kind": "sheet",
+      "link": "animations.villain.cast",
+      "out_dir": "assets/art/villain",
+      "size": "1536x512",
+      "columns": 4,
+      "rows": 1,
+      "background": "transparent",
+      "reference": [
+        "villain"
+      ],
+      "pixel_height": 64,
+      "fps": 10,
+      "loop": false,
+      "game_height": 192,
+      "prompt": "Spell casting attack of the dark sorcerer, side view facing right: raising the staff, charging dark energy, thrusting the staff forward, releasing the spell."
+    },
+    {
+      "id": "vfx_bolt",
+      "kind": "sheet",
+      "link": "vfx.bolt",
+      "out_dir": "assets/art/vfx",
+      "size": "1536x1024",
+      "columns": 3,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 14,
+      "fps": 16,
+      "loop": true,
+      "game_height": 42,
+      "prompt": "Powerful magic bolt projectile flying to the right: a bright white-hot core inside a warm orange and gold comet head, a long tapering glowing tail streaming behind it to the left, crackling sparks, very bright and high contrast against a dark night scene, the tail flickers between frames.",
+      "role": "effect"
+    },
+    {
+      "id": "vfx_boss_orb",
+      "kind": "sheet",
+      "link": "vfx.boss_orb",
+      "out_dir": "assets/art/vfx",
+      "size": "1024x1024",
+      "columns": 2,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 20,
+      "fps": 12,
+      "loop": true,
+      "game_height": 60,
+      "prompt": "Dangerous dark-magic orb projectile: a very bright glowing magenta and violet energy core with a crackling bright outer ring, extremely high contrast so it stands out clearly against a dark night forest, swirling and pulsing between frames.",
+      "role": "effect"
+    },
+    {
+      "id": "vfx_hit_spark",
+      "kind": "sheet",
+      "link": "vfx.hit_spark",
+      "out_dir": "assets/art/vfx",
+      "size": "1536x1024",
+      "columns": 3,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 16,
+      "fps": 24,
+      "loop": false,
+      "game_height": 48,
+      "prompt": "Impact spark burst effect: a quick bright flash that expands into sharp spark rays and fades away over the frames.",
+      "role": "effect"
+    },
+    {
+      "id": "vfx_death_puff",
+      "kind": "sheet",
+      "link": "vfx.death_puff",
+      "out_dir": "assets/art/vfx",
+      "size": "1536x1024",
+      "columns": 3,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 32,
+      "fps": 18,
+      "loop": false,
+      "game_height": 96,
+      "prompt": "Creature defeat effect: a burst of dark shadow smoke with a few magic sparkles that expands and dissipates into nothing over the frames, no blood, no gore.",
+      "role": "effect"
+    },
+    {
+      "id": "vfx_explosion",
+      "kind": "sheet",
+      "link": "vfx.explosion",
+      "out_dir": "assets/art/vfx",
+      "size": "1536x1024",
+      "columns": 3,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 48,
+      "fps": 18,
+      "loop": false,
+      "game_height": 144,
+      "prompt": "Magic explosion effect: a bright magical blast that expands into a ring of light and energy fragments and fades away over the frames.",
+      "role": "effect"
+    },
+    {
+      "id": "vfx_spawn_warning",
+      "kind": "sheet",
+      "link": "vfx.spawn_warning",
+      "out_dir": "assets/art/vfx",
+      "size": "1024x1024",
+      "columns": 2,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 24,
+      "fps": 10,
+      "loop": true,
+      "game_height": 72,
+      "prompt": "Danger warning marker: a glowing red magic rune circle that pulses brighter and dimmer between frames, seen from the front.",
+      "role": "effect"
+    },
+    {
+      "id": "vfx_teleport",
+      "kind": "sheet",
+      "link": "vfx.teleport",
+      "out_dir": "assets/art/vfx",
+      "size": "1536x1024",
+      "columns": 3,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 64,
+      "fps": 16,
+      "loop": false,
+      "game_height": 192,
+      "prompt": "Teleport effect: a tall vertical swirl of dark purple smoke and sparks that bursts open and then fades away over the frames.",
+      "role": "effect"
+    },
+    {
+      "id": "far_background",
+      "kind": "backdrop",
+      "link": "level_art.forest.far",
+      "out": "assets/art/level/far_background.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "reference": [
+        "hero"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "Distant parallax background for a night forest level: deep night sky with a large moon and stars, far-away misty tree silhouettes on the horizon, no foreground, no ground, no characters, no buildings, low contrast and muted so gameplay stays readable. Same pixel art style as the reference image."
+    },
+    {
+      "id": "level_seg_0",
+      "kind": "panorama",
+      "link": "level_art.forest.segments.0",
+      "out": "assets/art/level/segment_0.png",
+      "size": "1536x512",
+      "background": "transparent",
+      "reference": [
+        "far_background"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "Wide side-scrolling level segment of an enchanted night forest, the start of the level. A continuous, perfectly flat walkable forest floor path runs horizontally across the ENTIRE width along the bottom sixth of the image, with grass, roots and stones on its surface and soil below. Above the floor: large tree trunks, hanging vines and bushes framing the path, leaving the center open for gameplay. The upper sky area is empty and fully transparent so a background shows through. Both left and right edges must be designed to connect seamlessly with neighbouring segments. No characters, no text. Same pixel art style as the reference image.",
+      "floor_link": "level_art.forest.floor_rows.0"
+    },
+    {
+      "id": "level_seg_1",
+      "kind": "panorama",
+      "link": "level_art.forest.segments.1",
+      "out": "assets/art/level/segment_1.png",
+      "size": "1536x512",
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "The next segment of the same forest level, continuing seamlessly from the right edge of the reference image, deeper into the forest: glowing mushrooms and thicker undergrowth. The same continuous, perfectly flat walkable forest floor path at exactly the same height along the bottom sixth, across the ENTIRE width. The upper sky area is empty and fully transparent. Left and right edges must connect seamlessly. No characters, no text. Same pixel art style as the reference image.",
+      "floor_link": "level_art.forest.floor_rows.1"
+    },
+    {
+      "id": "level_seg_2",
+      "kind": "panorama",
+      "link": "level_art.forest.segments.2",
+      "out": "assets/art/level/segment_2.png",
+      "size": "1536x512",
+      "background": "transparent",
+      "reference": [
+        "level_seg_1"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "The next segment of the same forest level, continuing seamlessly from the right edge of the reference image, the forest getting darker and more twisted, spider webs between the trees. The same continuous, perfectly flat walkable forest floor path at exactly the same height along the bottom sixth, across the ENTIRE width. The upper sky area is empty and fully transparent. Left and right edges must connect seamlessly. No characters, no text. Same pixel art style as the reference image.",
+      "floor_link": "level_art.forest.floor_rows.2"
+    },
+    {
+      "id": "fg_tree",
+      "kind": "static",
+      "link": "level_art.forest.seam_cover",
+      "out": "assets/art/level/fg_tree.png",
+      "size": "1024x1536",
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 200,
+      "game_height": 600,
+      "prompt": "A single tall ancient forest tree trunk in the foreground, thick gnarled bark, roots spreading at its base, a few hanging vines and leaves at the top, side view, the trunk fills the full image height from roots at the bottom edge to branches at the top edge. Same pixel art style and palette as the reference image. Isolated subject on a fully transparent background: no scenery, no ground, no shadow, no glow, no frame."
+    },
+    {
+      "id": "ui_crosshair",
+      "kind": "static",
+      "link": "ui.crosshair",
+      "out": "assets/art/ui/crosshair.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 16,
+      "game_height": 48,
+      "prompt": "Aiming crosshair reticle for a magic action game: a thin glowing circular rune ring with four short bright ticks pointing inward and a tiny dot in the center, bright warm gold with a dark outline so it is visible on dark backgrounds, perfectly centered and symmetric, seen from the front. Same pixel art style and palette as the reference image. Isolated subject on a fully transparent background: nothing else, no frame."
+    },
+    {
+      "id": "ui_panel",
+      "kind": "static",
+      "link": "ui.panel",
+      "out": "assets/art/ui/panel.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 48,
+      "game_height": 144,
+      "prompt": "Empty square game UI panel frame: a dark translucent-looking stone and dark wood border with thin silver trim and small rune details in the four corners, the border is the same thickness on all four sides, the inside is a plain flat dark fill with no decoration, seen from the front, filling the whole image. Same pixel art style and palette as the reference image. Transparent background outside the frame, no text."
+    },
+    {
+      "id": "ui_bar",
+      "kind": "static",
+      "link": "ui.bar",
+      "out": "assets/art/ui/bar.png",
+      "size": "1536x512",
+      "background": "transparent",
+      "reference": [
+        "ui_panel"
+      ],
+      "pixel_height": 12,
+      "game_height": 36,
+      "prompt": "Empty long horizontal progress bar frame for a game HUD, the same dark stone, wood and silver trim style as the reference image, a thin border of equal thickness around a long empty flat dark slot, spanning the full image width, seen from the front. Transparent background outside the frame, no text, no fill."
+    },
+    {
+      "id": "ui_icons",
+      "kind": "sheet",
+      "role": "icons",
+      "link": "ui.icons",
+      "out_dir": "assets/art/ui",
+      "size": "1536x1024",
+      "columns": 4,
+      "rows": 3,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 24,
+      "fps": 1,
+      "loop": false,
+      "game_height": 72,
+      "anchor": "none",
+      "prompt": "Twelve spell and ability icons in this exact order: 1 a fast orange magic bolt with speed lines; 2 an orange magic bolt piercing through two targets; 3 three orange magic bolts fanning out; 4 a small winged boot for a double jump; 5 a dark shadow silhouette dashing with motion streaks; 6 a boot with two wings for a triple jump; 7 a floating cyan feather with a small clock; 8 a floating cyan rock bursting into an explosion; 9 a huge cyan hand lifting a heavy boulder; 10 a glowing orange magic wand casting a spark; 11 a glowing cyan levitation swirl; 12 a bright golden star."
+    },
+    {
+      "id": "ui_tree_bg",
+      "kind": "backdrop",
+      "link": "ui.tree_background",
+      "out": "assets/art/ui/tree_background.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "Background for a spell tree menu screen: an old open spellbook laid over a dark wooden desk lit by candles, the two book pages are plain and mostly empty so menu content can be drawn on top, soft magical glow, dark and low contrast. Same pixel art style and palette as the reference image. No text, no letters, no characters."
+    },
+    {
+      "id": "vfx_muzzle",
+      "kind": "sheet",
+      "role": "effect",
+      "link": "vfx.muzzle",
+      "out_dir": "assets/art/vfx",
+      "size": "1536x1024",
+      "columns": 3,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 16,
+      "fps": 30,
+      "loop": false,
+      "game_height": 48,
+      "prompt": "Magic wand muzzle flash effect: a quick bright warm orange and white burst that flares outward to the right in a short star shape and fades out over the frames."
+    },
+    {
+      "id": "vfx_level_up",
+      "kind": "sheet",
+      "role": "effect",
+      "link": "vfx.level_up",
+      "out_dir": "assets/art/vfx",
+      "size": "1536x1024",
+      "columns": 3,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 64,
+      "fps": 14,
+      "loop": false,
+      "game_height": 192,
+      "prompt": "Level up effect: a tall column of golden light rising from the ground with sparkles and small stars spiraling upward, growing bright and then fading away over the frames."
+    },
+    {
+      "id": "level_cave_0",
+      "kind": "panorama",
+      "link": "level_art.cave.segments.0",
+      "floor_link": "level_art.cave.floor_rows.0",
+      "out": "assets/art/level/segment_cave_0.png",
+      "size": "1536x512",
+      "background": "opaque",
+      "reference": [
+        "hero"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "The first segment of a side-scrolling cave level. Only the leftmost tenth shows a small dark opening to the outside; the rest is already deep inside the cave: stalagmites, a few crystal clusters on the walls. UNDERGROUND CAVE environment, completely enclosed: a jagged rock ceiling with stalactites across the whole top edge, rough cave walls, cold grey-violet stone with deep shadows. The ONLY light comes from clusters of glowing cyan crystals and faintly glowing fungus. The walkable floor is ROUGH DARK STONE AND GRAVEL with small rocks and puddles: absolutely NO grass, NO leaves, NO plants on the floor, NO trees, NO sky, NO moon. A perfectly flat, continuous walkable stone floor at exactly the same height along the bottom sixth, across the ENTIRE width. No characters, no text. Same pixel art technique as the reference image, but a different, colder stone palette.",
+      "glow_link": "level_art.cave.glow_points.0"
+    },
+    {
+      "id": "level_cave_1",
+      "kind": "panorama",
+      "link": "level_art.cave.segments.1",
+      "floor_link": "level_art.cave.floor_rows.1",
+      "out": "assets/art/level/segment_cave_1.png",
+      "size": "1536x512",
+      "background": "opaque",
+      "reference": [
+        "level_cave_0"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "The next segment of the same cave, continuing seamlessly from the reference image, deep inside with no opening anywhere: a tall cavern with hanging roots from the ceiling, big crystal clusters, an underground stream glinting in the back. UNDERGROUND CAVE environment, completely enclosed: a jagged rock ceiling with stalactites across the whole top edge, rough cave walls, cold grey-violet stone with deep shadows. The ONLY light comes from clusters of glowing cyan crystals and faintly glowing fungus. The walkable floor is ROUGH DARK STONE AND GRAVEL with small rocks and puddles: absolutely NO grass, NO leaves, NO plants on the floor, NO trees, NO sky, NO moon. A perfectly flat, continuous walkable stone floor at exactly the same height along the bottom sixth, across the ENTIRE width. No characters, no text. Same pixel art technique as the reference image, but a different, colder stone palette.",
+      "glow_link": "level_art.cave.glow_points.1"
+    },
+    {
+      "id": "ui_icons_2",
+      "kind": "sheet",
+      "role": "icons",
+      "link": "ui.icons_2",
+      "out_dir": "assets/art/ui",
+      "size": "1024x1024",
+      "columns": 2,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "ui_icons"
+      ],
+      "pixel_height": 24,
+      "fps": 1,
+      "loop": false,
+      "game_height": 72,
+      "anchor": "none",
+      "prompt": "Four ability icons in this exact order, same style and size as the reference icons: 1 a bright red heart with a small oak leaf; 2 an orange magic starburst shooting bolts in every direction around a center; 3 a glowing white-gold light orb on the tip of a wand; 4 a powerful orange magic bolt with a flexed energy aura."
+    },
+    {
+      "id": "vfx_lumos_orb",
+      "kind": "sheet",
+      "role": "effect",
+      "link": "vfx.lumos_orb",
+      "out_dir": "assets/art/vfx",
+      "size": "1024x1024",
+      "columns": 2,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 14,
+      "fps": 8,
+      "loop": true,
+      "game_height": 42,
+      "prompt": "A small floating orb of warm white-gold magical light with tiny sparkles orbiting it, softly pulsing brighter and dimmer between frames."
+    },
+    {
+      "id": "level_cave_2",
+      "kind": "panorama",
+      "link": "level_art.cave.segments.2",
+      "floor_link": "level_art.cave.floor_rows.2",
+      "out": "assets/art/level/segment_cave_2.png",
+      "size": "1536x512",
+      "background": "opaque",
+      "reference": [
+        "level_cave_1"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "The next segment of the same cave, continuing seamlessly from the reference image, deep inside with no opening anywhere: a wolf den with gnawed bones, claw marks on the rock, a nest of old straw against the wall, crystal clusters. UNDERGROUND CAVE environment, completely enclosed: a jagged rock ceiling with stalactites across the whole top edge, rough cave walls, cold grey-violet stone with deep shadows. The ONLY light comes from clusters of glowing cyan crystals and faintly glowing fungus. The walkable floor is ROUGH DARK STONE AND GRAVEL with small rocks and puddles: absolutely NO grass, NO leaves, NO plants on the floor, NO trees, NO sky, NO moon. A perfectly flat, continuous walkable stone floor at exactly the same height along the bottom sixth, across the ENTIRE width. No characters, no text. Same pixel art technique as the reference image, but a different, colder stone palette.",
+      "glow_link": "level_art.cave.glow_points.2"
+    },
+    {
+      "id": "level_cave_3",
+      "kind": "panorama",
+      "link": "level_art.cave.segments.3",
+      "floor_link": "level_art.cave.floor_rows.3",
+      "out": "assets/art/level/segment_cave_3.png",
+      "size": "1536x512",
+      "background": "opaque",
+      "reference": [
+        "level_cave_2"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "The final segment of the same cave, continuing seamlessly from the reference image: the tunnel narrows and, only at the rightmost edge, opens to a stormy night outside. UNDERGROUND CAVE environment, completely enclosed: a jagged rock ceiling with stalactites across the whole top edge, rough cave walls, cold grey-violet stone with deep shadows. The ONLY light comes from clusters of glowing cyan crystals and faintly glowing fungus. The walkable floor is ROUGH DARK STONE AND GRAVEL with small rocks and puddles: absolutely NO grass, NO leaves, NO plants on the floor, NO trees, No sky except at the exit on the right edge. A perfectly flat, continuous walkable stone floor at exactly the same height along the bottom sixth, across the ENTIRE width. No characters, no text. Same pixel art technique as the reference image, but a different, colder stone palette.",
+      "glow_link": "level_art.cave.glow_points.3"
+    },
+    {
+      "id": "graveyard_far",
+      "kind": "backdrop",
+      "link": "level_art.graveyard.far",
+      "out": "assets/art/level/graveyard_far.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "reference": [
+        "far_background"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "Distant parallax background for a stormy graveyard level: a dark purple storm sky with heavy clouds, a pale moon half hidden, distant lightning, far silhouettes of dead trees and a ruined chapel on a hill. No foreground, no ground, no characters, low contrast. Same pixel art style as the reference image."
+    },
+    {
+      "id": "graveyard_0",
+      "kind": "panorama",
+      "link": "level_art.graveyard.segments.0",
+      "floor_link": "level_art.graveyard.floor_rows.0",
+      "out": "assets/art/level/segment_graveyard_0.png",
+      "size": "1536x512",
+      "background": "transparent",
+      "reference": [
+        "level_cave_3",
+        "graveyard_far"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "Side-scrolling level segment: an old overgrown graveyard at night after leaving a cave: crooked gravestones, iron fences, dead trees, low fog on the ground, a broken stone angel statue. A continuous, perfectly flat walkable floor at exactly the same height along the bottom sixth, across the ENTIRE width. The upper sky area is empty and fully transparent so a background shows through. Right edge connects seamlessly. Original design, no characters, no text. Same pixel art style as the reference image."
+    },
+    {
+      "id": "graveyard_arena",
+      "kind": "panorama",
+      "link": "level_art.graveyard.segments.1",
+      "floor_link": "level_art.graveyard.floor_rows.1",
+      "out": "assets/art/level/segment_graveyard_arena.png",
+      "size": "1536x512",
+      "background": "transparent",
+      "reference": [
+        "graveyard_0"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "The final boss arena of the same graveyard, continuing seamlessly from the reference image: an open circle of ancient tombs around a large cracked central tomb, tall dark obelisks, candles and ritual marks on the ground, the right edge closed by a crumbling mausoleum wall. A continuous, perfectly flat walkable floor at exactly the same height along the bottom sixth, across the ENTIRE width. The upper sky area is empty and fully transparent. Original design, no characters, no text. Same pixel art style as the reference image."
+    },
+    {
+      "id": "villain_transform",
+      "kind": "sheet",
+      "link": "animations.villain.transform",
+      "out_dir": "assets/art/villain",
+      "size": "1536x1024",
+      "columns": 3,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "villain"
+      ],
+      "pixel_height": 64,
+      "fps": 8,
+      "loop": false,
+      "game_height": 192,
+      "prompt": "Transformation of the dark sorcerer, side view facing right: he raises his staff, dark smoke engulfs his body, his body dissolves into swirling shadow, and the shadow grows into a taller ghostly shadow wraith silhouette with glowing eyes."
+    },
+    {
+      "id": "wraith",
+      "kind": "static",
+      "link": "sprites.wraith",
+      "out": "assets/art/villain/wraith.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "reference": [
+        "villain"
+      ],
+      "pixel_height": 72,
+      "game_height": 216,
+      "prompt": "The dark sorcerer's true form: a huge floating shadow wraith made of dark purple smoke and tattered cloak, long clawed arms, a hood with two glowing violet eyes and the same staff crystal floating in front of it, side view facing right, whole body visible, no legs, the lower body fades into smoke. Original design. Same pixel art style as the reference image. Isolated subject on a fully transparent background: no scenery, no ground, no shadow, no glow, no frame."
+    },
+    {
+      "id": "wraith_idle",
+      "kind": "sheet",
+      "link": "animations.wraith.idle",
+      "out_dir": "assets/art/villain",
+      "size": "1536x512",
+      "columns": 4,
+      "rows": 1,
+      "background": "transparent",
+      "reference": [
+        "wraith"
+      ],
+      "pixel_height": 72,
+      "fps": 6,
+      "loop": true,
+      "game_height": 216,
+      "anchor": "feet",
+      "prompt": "Floating idle loop of the shadow wraith, side view facing right: hovering up and down, smoke tail swirling, cloak tatters waving, eyes pulsing."
+    },
+    {
+      "id": "wraith_cast",
+      "kind": "sheet",
+      "link": "animations.wraith.cast",
+      "out_dir": "assets/art/villain",
+      "size": "1536x512",
+      "columns": 4,
+      "rows": 1,
+      "background": "transparent",
+      "reference": [
+        "wraith"
+      ],
+      "pixel_height": 72,
+      "fps": 10,
+      "loop": false,
+      "game_height": 216,
+      "anchor": "feet",
+      "prompt": "Attack of the shadow wraith, side view facing right: pulling both clawed arms back, gathering violet energy, then thrusting both arms forward releasing a blast."
+    },
+    {
+      "id": "vfx_beam",
+      "kind": "sheet",
+      "role": "effect",
+      "link": "vfx.beam",
+      "out_dir": "assets/art/vfx",
+      "size": "1536x1024",
+      "columns": 1,
+      "rows": 4,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 16,
+      "fps": 16,
+      "loop": true,
+      "game_height": 48,
+      "anchor": "none",
+      "prompt": "A long horizontal beam of crackling dark violet and magenta magic energy spanning the full width of each cell, bright white core, flickering between frames."
+    },
+    {
+      "id": "vfx_shockwave",
+      "kind": "sheet",
+      "role": "effect",
+      "link": "vfx.shockwave",
+      "out_dir": "assets/art/vfx",
+      "size": "1536x1024",
+      "columns": 3,
+      "rows": 2,
+      "background": "transparent",
+      "reference": [
+        "level_seg_0"
+      ],
+      "pixel_height": 20,
+      "fps": 14,
+      "loop": true,
+      "game_height": 60,
+      "anchor": "none",
+      "prompt": "A low ground shockwave of dark violet magic energy and flying stone debris rolling to the right along the floor, seen from the side, rippling between frames."
+    },
+    {
+      "id": "title_backdrop",
+      "kind": "backdrop",
+      "link": "ui.title.backdrop",
+      "out": "assets/art/ui/title_backdrop.png",
+      "size": "1536x768",
+      "background": "opaque",
+      "reference": [
+        "hero",
+        "villain"
+      ],
+      "pixel_height": 240,
+      "game_height": 720,
+      "prompt": "Full-screen title illustration for a side-scrolling action game. In the lower-left to center foreground, small in scale against the huge scene, the young wizard hero seen from behind in a three-quarter back view, hooded robe, wand raised high with a bright warm golden glow radiating from its tip, lighting the ground around him. He faces a towering dark sorcerer looming above him: a tall figure in a tattered hooded cloak holding a twisted staff with a glowing crystal, floating over a ruined stormy graveyard filled with crooked tombstones and the broken silhouette of a chapel, jagged lightning bolts cracking across the sky, cold blue and purple storm palette contrasting with the hero's warm golden light. The upper third of the image is calmer, darker and less busy, left empty for a game title to be placed over it later. Original character designs, not based on any existing franchise: no round glasses, no lightning-bolt scar, no school crest, no striped scarf on the hero; no snake-like noseless face, no bald pale head on the sorcerer. Same pixel art style as the reference images. Fully opaque background, dramatic and moody but not gory. No text, no letters, no logo, no watermark anywhere in the image."
+    }
+  ],
+  "effect_rules": "Sprite sheet with exactly {frames} frames of a visual EFFECT only: no characters, no people, no creatures, no animals. Arranged in a grid of {columns} columns by {rows} rows of equal-size cells, read left-to-right then top-to-bottom; the frames show the effect's progression over time. The effect is centered in every cell with empty margin around it. The reference image is ONLY a guide for the pixel art style and palette: do not copy or include anything drawn in it. Fully transparent background, no grid lines, no borders, no numbers, no text.",
+  "icon_rules": "A set of exactly {frames} square game UI ICONS arranged in a grid of {columns} columns by {rows} rows of equal-size cells, read left-to-right then top-to-bottom, one icon per cell in the order listed below. Every icon: same size, same framing, a bold readable symbol centered in its cell with empty margin, strong silhouette readable at 32 pixels. The reference image is ONLY a guide for the pixel art style and palette: do not copy anything drawn in it. Fully transparent background, no grid lines, no borders between cells, no numbers, no text, no letters."
+}
