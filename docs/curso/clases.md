@@ -8,6 +8,9 @@ ElevenLabs generen todo en vivo:
 python tools/curso/clase.py 4
 ```
 
+En Claude Code también están los comandos `/clase-1` a `/clase-8`, que hacen lo mismo
+(y en las clases 4, 6 y 7 abren el Estudio).
+
 | Comando | Qué queda en el proyecto | Qué muestra el Estudio |
 |---|---|---|
 | `inicio` | La plantilla sin juego (clases 1 a 3) | Nada |

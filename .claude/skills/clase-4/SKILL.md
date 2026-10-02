@@ -1,6 +1,6 @@
 ---
-name: clase-arte
-description: "Deja el proyecto como queda al terminar la clase 4 (el arte) y abre el Estudio, que muestra solo el arte. Úsalo para mostrar el arte ya generado sin esperar a GPT Image."
+name: clase-4
+description: "Deja el proyecto como queda al terminar la clase 4 (el arte). Personajes, fondos, efectos e interfaz; el Estudio muestra solo el arte."
 user-invocable: true
 allowed-tools: Bash(python tools/curso/clase.py *), Bash(curl -s *), Bash(python tools/studio/server.py*), Bash(python -m webbrowser *)
 ---
@@ -11,8 +11,7 @@ allowed-tools: Bash(python tools/curso/clase.py *), Bash(curl -s *), Bash(python
 
 `python tools/curso/clase.py 4`
 
-Copia los personajes, fondos, efectos e interfaz desde `tools/curso/juego-completo/`
-y deja en los manifiestos solo el arte. Si falla, muestra el error tal cual.
+Personajes, fondos, efectos e interfaz; el Estudio muestra solo el arte. Si falla, muestra el error tal cual.
 
 ## 2. Abrir el Estudio
 
@@ -25,5 +24,4 @@ Comprueba si ya está abierto:
 
 ## 3. Avisar
 
-Responde en una línea, en español neutro: el proyecto quedó en la clase 4 y el Estudio
-está abierto en `http://127.0.0.1:8765` mostrando solo el arte. No agregues nada más.
+Responde en una o dos líneas, en español neutro: el proyecto quedó en la clase 4. El Estudio está abierto en http://127.0.0.1:8765 mostrando solo el arte. No agregues nada más.
