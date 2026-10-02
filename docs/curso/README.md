@@ -2,6 +2,7 @@
 
 - [prompts.md](prompts.md): los 8 prompts, uno por clase, para copiar en Claude Code.
 - [guiones/](guiones/): lo que se dice en cámara en cada clase.
+- [clases.md](clases.md): el comando para dejar el proyecto como queda al terminar cada clase.
 
 ## Orden de las clases
 
